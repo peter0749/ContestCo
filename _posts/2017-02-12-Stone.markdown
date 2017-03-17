@@ -1,0 +1,95 @@
+---
+layout: post
+title: IOICamp2017 -- 拿石頭
+date: 2017-02-12 22:11
+comments: true
+external-url:
+categories: game
+---
+
+There are stones!
+
+在 IOICamp2017 解過的題目
+
+## 不提供傳送門
+
+## 題目敘述
+$$N$$ 堆石頭，每 $$a_{i}$$ 個排成一列，編號從 1~$$a_{i}$$ ，兩人輪流拿，每次可以從**某一堆**拿取一顆石頭，或是任意相鄰的兩個石頭，最後不能拿的人輸。給定盤面，假設兩人都以最佳策略玩遊戲，判定先手或後手贏。
+
+## 輸入格式
+第一行一個正整數 $$T$$ ，代表測資筆數。每筆測資兩行，
+第一行一個整數 $$N$$ ，第二行 $$N$$ 個正整數 $$a_{i}$$ ，代表有幾顆石頭排成一列。
+
+## 限制
+
+<center>
+$$1 \leq T \leq 100$$
+
+$$1 \leq N,k \leq 10000$$
+
+$$1 \leq a_{i} \leq 10^{18}$$
+</center>
+
+## 輸出格式
+輸出一行。若先手贏，輸出 `F` ，若後手贏，輸出 `S` 。
+
+## 解題想法
+
+總之先算 SG 值吧，算出 SG 值後列個一千筆看看，一定能找到規律的。
+SG 值都求出來後，直接將每堆 xor 起來，若不等於 0 則先手贏，反之則後手贏。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long int ULL;
+const int MAXN=500;
+int sg[MAXN]={0,1,2,3,1};
+set<int> s, l, t;
+ULL input[10010];
+
+void build(){
+    l.insert(3);l.insert(2);
+    for(int i=5; i<MAXN; ++i) {
+        s.clear();
+        for(int j=i-1, k=0; k<=j; --j, ++k) {
+            s.insert(sg[j]^sg[k]);
+        }
+        t=s;
+        s.insert(l.begin(), l.end());
+        l=t;
+        int maxval = *s.rbegin();
+        int j;
+        for(j=0; j<=maxval && s.count(j); ++j);
+        sg[i]=j;
+    }
+}
+
+int getsg(ULL n) {
+    if(n>=200uLL) return sg[200uLL+(n-200uLL)%12uLL];
+    return sg[n];//n<200
+}
+
+int main(void) {
+    ios::sync_with_stdio(false);cin.tie(0);                            
+    int T, n;
+    build();
+    cin >> T;
+    while(T--) {
+        cin >> n;
+        ULL ans=0uLL;
+        for(int i=0; i<n; ++i) {
+            ULL temp;
+            cin >> temp;
+            ans^=getsg(temp);
+        }
+        cout<<(ans?'F':'S')<<'\n';
+    }
+    
+    return 0;
+}
+
+{% endhighlight %}
+

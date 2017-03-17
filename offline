@@ -2,8 +2,8 @@
 title:               "Peter's codebook"
 tagline:             A blog full of codes
 description:
-baseurl:            "/ContestCo"
-url:                "https://peter0749.github.io"
+baseurl:            #"/Lagrange"
+url:                #"https://lenpaul.github.io"
 github:
   url:               #"https://lenpaul.github.io/Lagrange"
 author:

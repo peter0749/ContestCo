@@ -1,0 +1,88 @@
+---
+layout: post
+title: POJ1258 -- Agri-Net
+date: 2017-03-03 20:20
+comments: true
+external-url:
+categories: MST
+---
+
+Prim!
+
+## 傳送門
+[POJ1258](http://poj.org/problem?id=1258)
+
+## 題目概述
+一個農夫市長想要在鄉鎮內所有農場建構網路，他必須連結所有農場，在農場間拉光纖必須花費成本。給定每對農場間拉光纖需要的成本，現在要以最小成本連接所有農場，任兩農場間都必須可以通訊（可以藉由中介通訊），求最小成本是多少？
+
+## 輸入格式
+第一行 1 個正整數 $$N$$ ，代表有 $$N$$ 個農場。
+接下來是一個 $$N\times N$$ 的矩陣，代表農場間要拉光纖的花費。
+
+## 限制
+
+<center>
+矩陣內的值不超過 100000
+$$3 \leq N \leq 100$$
+</center>
+
+## 輸出格式
+一個整數，代表最小成本。
+
+## 解題想法
+直接套用 Prim 演算法，求出最小生成樹的成本是多少。
+這題使用複雜度 $$O(\left| V\right| \left| E\right| )$$ 的 Prim 即可。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+
+#include <iostream>
+#include <string>
+#include <queue>
+#include <functional>
+#include <algorithm>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+const int scale=105;
+const int INF=1e9+7;
+int gra[scale][scale];
+int N;
+bool used[scale];
+int d[scale];
+
+int prim() {
+    typedef pair<int, int> IPI; //weight, node
+    fill(used, used+N, false);
+    fill(d, d+N, INF);
+    int total=0;
+    d[0]=0;
+    for(;;) {
+        int v=-1;
+        for(int u=0; u<N; ++u) {
+            if(!used[u] && (v==-1 || d[u]<d[v])) v=u;
+        }
+        if(v==-1)break; // All good
+        used[v]=true;
+        total+=d[v];
+        for(int u=0; u<N; ++u) {
+            d[u] = min(d[u], gra[v][u]);
+        }
+    }
+    return total;
+}
+
+int main(void) {
+    while( scanf("%d",&N)==1) {
+        for(int i=0; i<N; ++i) for(int j=0; j<N; ++j)
+            scanf("%d",&gra[i][j]);
+        printf("%d\n", prim());
+    }
+    return 0;
+}
+
+{% endhighlight %}
+

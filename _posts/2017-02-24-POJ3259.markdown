@@ -1,0 +1,124 @@
+---
+layout: post
+title: POJ3259 -- Wormholes
+date: 2017-02-24 23:02
+comments: true
+external-url:
+categories: Shortest_Path
+---
+
+Bellman!?
+
+## 傳送門
+[POJ3259](http://poj.org/problem?id=3259)
+
+## 題目敘述
+有一個農夫的農場莫名奇妙出現了蟲洞，可以把自己傳送到過去時間的某個地方。
+給定 F 張圖，每一張圖有 N 個區域（編號 1..N），有 M 條路，是雙向通行的，還有 W 個蟲洞，是單向通行的。
+利用道路從一個區域到另一個區域需要耗時，而從蟲洞穿越則會回到過去時間的某個區域。
+農夫想要從某個地方出發，遇到過去在起點的自己，請問他能不能成功呢？
+
+## 輸入格式
+第一行一個正整數 F ，代表有 F 個地圖。接下來有 F 筆測資。
+每一筆測資第一行有三個整數: $$N, M, W$$ ，分別代表有 N 個區域、 M 條雙向路、 W 個蟲洞。
+接下來有 M 行，每行有 $$S, E, T$$ 三個數字，代表一條路從 S 到 E ，需要耗時 T 秒。
+接下來有 W 行，每行也有 $$S, E, T$$ 三個數字，代表一個蟲洞從 S 到 E ，穿越後會回到 T 秒前的時空。
+
+## 限制
+
+<center>
+$$1 \leq F \leq 5$$
+$$1 \leq N \leq 500$$
+$$1 \leq M \leq 2500$$
+$$1 \leq W \leq 200$$
+$$1 \leq T \leq 10000$$
+</center>
+
+## 輸出格式
+對於每筆測資，可以成功輸出 `YES` ，無法達成輸出 `NO` ，輸出後換行。
+
+## 解題想法
+標準的找負向環問題，類似 Bellman-Ford Algorithm。
+不過還不是很清楚整個算法的思路，可能之後要再找時間研究。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+class Solution {
+    typedef struct{int from, to, cost;}EDGE;
+    private:
+        int F, N, M, W;
+        int ES;
+        int *dist;
+        EDGE *edge;
+        void link(int from, int to, int cost, int lev) {
+            --from; --to;
+            edge[lev].from=from;
+            edge[lev].to=to;
+            edge[lev].cost=cost;
+        }
+        void init(void) {
+            dist = new int[N+1];
+            edge = new EDGE[M*2+W+1];
+            ES=0;
+        }
+        void des(void) {
+            delete[] dist; delete[] edge;
+            ES=0;
+        }
+        void read_data() {
+            scanf("%d%d%d", &N,&M,&W);
+            init();
+            int u, v, w;
+            for(size_t i=0; i!=M; ++i) {
+                scanf("%d%d%d", &u, &v, &w);
+                link(u,v,w,ES);++ES;
+                link(v,u,w,ES);++ES;
+            }
+            for(size_t i=0; i!=W; ++i) {
+                scanf("%d%d%d", &u, &v, &w);
+                link(u,v,-w,ES);++ES;
+            }
+        }
+        bool find_negLoop(void) {
+            memset(dist, 0, sizeof(dist));
+            for(int i=0; i!=N; ++i) {
+                for(int j=0; j!=ES; ++j) {
+                    EDGE inst=edge[j];
+                    if( dist[inst.to] > dist[inst.from]+inst.cost) {
+                        dist[inst.to] = dist[inst.from]+inst.cost;
+                        if(i==N-1) return true;
+                    }
+                }
+            }
+            return false;
+        }
+    public:
+        void solv(void) {
+            scanf("%d", &F);
+            while(F--) {
+                read_data();
+                printf(( find_negLoop() )?"YES\n":"NO\n");
+                //for(int i=0; i!=N; ++i) printf(" %d",dist[i]);
+                //puts("");
+                des();
+            }
+        }
+};
+
+int main(void) {
+    Solution sol;
+    sol.solv();
+    return 0;
+}
+{% endhighlight %}
+

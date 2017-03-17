@@ -1,0 +1,110 @@
+---
+layout: post
+title: POJ2139 -- Six Degrees of Cowvin Bacon
+date: 2017-02-24 20:47
+comments: true
+external-url:
+categories: Shortest_Path
+---
+
+Floyd-Warshall
+
+## 傳送門
+[POJ2139](http://poj.org/problem?id=2139)
+
+## 題目敘述
+一群牛最近正在做電影，定義一隻牛對於自己的 Degree 是 0 ，一隻牛對於一起做過同一部電影的牛 Degree 是 1 ，若兩隻牛沒有一起工作過，但有另一隻牛分別和這兩隻牛一起工作過，那麼這兩隻沒有一起工作過的牛的 Degree 是 2 。以上情況可以擴展到任意 Degree 。
+
+## 輸入格式
+第一行兩個正整數 $$N,M$$ ，代表有 N 隻牛（牛的編號從 1..N）、 M 部電影。
+接下來有 M行，
+每行先有一個整數 n ，代表這行後面有 n 個數字 $$a_{i}$$ ，每個數字代表編號 $$a_{i}$$ 的牛。
+
+## 限制
+
+<center>
+$$2 \leq N \leq 300$$
+
+$$1 \leq M \leq 10000$$
+</center>
+
+## 輸出格式
+輸出一個整數，代表這群牛裡面，具有最小平均 Degree 的牛，牠的平均 Degree * 100 是多少？（一隻牛的平均 Degree = 這隻牛對其他牛的 Degree 總和 / （總牛數-自己））
+
+## 解題想法
+使用 Floyd-Warshall ，算出每對牛的最短距離（Degree），在所有牛中找最小的 Degree 總和，然後 *100 / （總牛數-自己）。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+const size_t MAXN=305, MAXM=10005;
+const int INF=1e9;
+int deg[MAXN][MAXN];
+
+inline void init(void) {
+    for(size_t i=0; i!=MAXN; ++i) for(size_t j=0; j!=MAXN; ++j) deg[i][j]=INF;
+    for(size_t i=0; i!=MAXN; ++i) deg[i][i]=0;
+}
+
+inline void link(int *arr, int N) {
+    for(int i=0; i<N-1; ++i) {
+        for(int j=i+1; j<N; ++j) {
+            deg[ arr[i] ][ arr[j] ]=1;
+            deg[ arr[j] ][ arr[i] ]=1;
+        }
+    }
+}
+
+void FW(int N) {
+    for(int k=0; k!=N; ++k) {
+        for(int i=0; i!=N; ++i) {
+            for(int j=0; j!=N; ++j) {
+                deg[i][j]=min(deg[i][j],deg[i][k]+deg[k][j]);
+            }
+        }
+    }
+}
+
+int MM_mean(int N) {
+    int minval=1e9+7;
+    for(int i=0; i!=N; ++i) {
+        int acc=0;
+        for(int j=0; j!=N; ++j) acc+=(deg[i][j]);
+        //it is guaranteed that some relationship path exists between every pair of cows.
+        minval=min(minval, acc);
+    }
+    return (int)( (double)minval/(double)(N-1)*(double)100.0  );
+}
+
+int arr[MAXN];
+int main(void) {
+    int N, M, n;
+    init();
+    scanf("%d%d",&N,&M);
+    for(int i=0; i!=M; ++i) {
+        scanf("%d",&n);
+        for(int j=0; j!=n; ++j) { scanf("%d",arr+j); --arr[j];}//to 0-base
+        link(arr, n);
+    }
+    FW(N);
+    printf("%d\n", MM_mean(N));
+    /*
+    for(int i=0; i!=N; ++i) {
+        for(int j=0; j!=N; ++j) {
+            printf("%d ", deg[i][j]);
+        }
+        puts("");
+    }
+    */
+    return 0;
+}
+{% endhighlight %}
+

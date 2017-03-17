@@ -1,6 +1,7 @@
 ---
 layout: page
-title: Contact
+title: 聯絡我
 ---
 
-If you are having any problems, any questions or suggestions, feel free to [tweet at me](https://twitter.com/intent/tweet?text=%40paululele), or [file a GitHub issue](https://github.com/lenpaul/lagrange/issues/new)
+My GitHub: [peter0749](https://github.com/peter0749)
+My Facebook: [peter0749](https://www.facebook.com/peter0749)

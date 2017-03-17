@@ -1,0 +1,85 @@
+---
+layout: post
+title: IOICamp2017 -- 貓貓部長
+date: 2017-02-12 22:11
+comments: true
+external-url:
+categories: water
+---
+
+Meow~
+
+在 IOICamp2017 解過的題目
+
+## 不提供傳送門
+
+## 題目敘述
+自己去 IOICamp 的 Judge 上去看看吧
+
+## 輸入格式
+第一行一個正整數 $$T$$ ，代表測資筆數。每筆測資兩行，
+第一行兩個整數 $$N, k$$ ，第二行 $$N$$ 個正整數 $$a_{i}$$ 。
+
+## 限制
+
+<center>
+$$1 \leq T \leq 100$$
+
+$$1 \leq N,k \leq 100000$$
+
+$$1 \leq a_{i} \leq 100000$$
+</center>
+
+## 輸出格式
+若所有 $$a_{i}$$ 跟相距 $$k$$ 內位置的數字均不重複 (`[i-k,i+k]`) ，就輸出 `Yes` ，否則輸出 `No` 。
+
+## 程式碼:
+
+開 set 亂玩一通
+
+{% highlight cpp linenos=table %}
+
+#include <bits/stdc++.h>
+using namespace std;
+
+set<int> S;
+vector<int> V;
+
+int main(void) {
+    int T, N, k;
+    ios::sync_with_stdio(false);cin.tie(0);
+    cin>>T;
+    while(T--) {
+        cin >> N >> k;
+        for(int i=0; i<N; ++i) {
+            int temp;
+            cin>>temp;
+            V.push_back(temp);
+        }
+        bool fail=false;
+        for(int i=0; i<k && i<N; ++i) {
+            if(S.count(V[i])) { // Fails at the beginning.
+                fail=true; break;
+            }
+            S.insert(V[i]);
+        }
+        int i;
+        if(!fail) {
+            for(i=k; i<N; ++i) {
+                if(S.count(V[i])) break;
+                //else
+                S.erase(V[i-k]);
+                S.insert(V[i]);
+            }
+            fail = (i!=N);
+        }
+        cout << (!fail?"Yes\n":"No\n");
+        V.clear(); S.clear();
+    }
+    return 0;
+}
+
+
+{% endhighlight %}
+
+> 之前竟然寫了假解 OuO

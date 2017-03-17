@@ -1,5 +1,6 @@
 ---
 layout: page
-title: About
+title: 關於這裡
 ---
-Lagrange is a minimalist Jekyll. It is intended to have a clean, content focused interface for blog writing.
+
+這裡主要存放程式競賽，或是一些寫程式的筆記。

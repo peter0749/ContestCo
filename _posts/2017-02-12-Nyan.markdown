@@ -1,0 +1,85 @@
+---
+layout: post
+title: Nyan
+date: 2017-02-12 22:11
+comments: true
+external-url:
+categories: funny
+---
+
+## NyanNyanNyanNyan
+Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wZZ7oFKsKzY" frameborder="0" allowfullscreen></iframe>
+</center>
+
+## NyanNyan
+Nyan?
+
+## NyanNyan
+Nyan!
+Nyan!
+Nyan!
+
+Nyan 
+
+<center>
+$$Nyan(meow)$$ 
+</center>
+
+nyan "meow" nyan "Nyan"!
+
+Nyan
+
+<center>
+$$Rainbow$$
+</center>
+
+nyan nyan cat.
+
+<center>
+$$\forall{cat \in Rainbow},{Nyan(cat)}$$
+</center>
+
+Nyan Nyan...
+
+> $$\sum_{i=1}^{n}{i} = \frac{n(n+1)}{2}$$
+
+> $$ C_{3\times 3} =  \left( \begin{array}{ccc} 
+Nyan & Nyan & Nyan \\
+Nyan & Nyan & Nyan \\
+Nyan & Nyan & Nyan \end{array} \right)$$
+
+## Nyan
+```
+NyanNyanNyanNyanNyan
+NyanNyanNyanCat
+Nyan?Nyan!Nyan~\OUO/
+```
+
+## Cat
+```
+Nyan
+Nyan!?!?
+Nyan!?!?
+```
+
+## Meow
+{% highlight cpp linenos=table %}
+#include <stdio.h>
+#include <string.h>
+const size_t MAXN=100010;
+char input[MAXN];
+const char *nyan="Nyan";
+
+int main(void) {
+    while( (fgets(input,sizeof(input)-1, stdin)) != NULL ) {
+        int i;
+        for(i=0; input[i]!='\n' && input[i]==nyan[i%4]; ++i );
+        puts(input[i]=='\n'&&!(i%4)?"Nyan":"Nyan!?!?");
+    }
+    return 0;
+}
+
+{% endhighlight %}

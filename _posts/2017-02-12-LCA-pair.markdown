@@ -1,0 +1,105 @@
+---
+layout: post
+title: IOICamp2017 -- 最低共同祖先
+date: 2017-02-12 19:55
+comments: true
+external-url:
+categories: tree
+---
+
+Lowest Common Ancestor
+
+在 IOICamp2017 解過的題目，雖然名稱叫做「最低共同祖先」，但是並不真的要求出 LCA (?)
+
+## 不提供傳送門
+
+## 題目敘述
+在一棵樹上有 n 個點 $$v_{1}, ... , v_{n}$$ ，對每個點 $$v$$ ，找出有幾組有序點對的 LCA 是 $$v$$ 。
+
+## 輸入格式
+第一行一個正整數 $$T$$ ，代表測資筆數。每筆測資兩行，
+第一行整數 $$n$$ ，第二行 $$n-1$$ 個整數 $$p_{2}, ... , p_{n}$$ ，代表 $$v_{i}$$ 的老爸是 $$v_{p_{i}}$$ 。
+
+## 限制
+
+<center>
+$$1 \leq T \leq 100$$
+
+$$2 \leq n \leq 100000$$
+
+$$1 \leq p_{i} < i$$
+</center>
+
+## 輸出格式
+輸出 $$n$$ 個以空白分隔的整數 $$a_{1}, ... , a_{n}$$ ，代表有 $$a_{i}$$ 組有序點對的 LCA 是 $$v_{i}$$ 。
+
+## 解題想法
+對於樹上一組點對的 LCA ，可以想成這一組點對要走訪到對方，必定會經過 LCA ，
+所以要求出以某節點當作 LCA 的點對數，只要先求出它底下所有子樹大小就可以進一步求出。
+
+現在要求一個點作為 LCA 的組合數，
+
+有幾種情況需要考慮：
+
+1. 自己走到自己，這樣有一組（廢話）
+2. 自己底下個別子樹的所有節點到自己的組合
+3. 自己底下個別子樹的所有節點到其他子樹所有節點的組合
+
+> 注意：是「有序」點對。
+
+我的程式碼裡面有稍微變化一下算式，不過意義是一樣的。
+也就是
+<center>
+$$A_{i} = 1 + 2(T_{i}-1) + \sum_{v \in C_{i}}{\Big( T_{v}\times(T_{i}-T_{v}-1) \Big)}$$
+</center>
+其中， $$A_{i}$$ 代表編號 $$i$$ 的節點要算的點對數量， $$T_{i}$$ 代表編號 $$i$$ 的節點的子樹大小（包含自己）， $$C_{i}$$ 代表編號 $$i$$ 節點的孩子。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <bits/stdc++.h>
+using namespace std;
+typedef unsigned long long int UT;
+
+const int MAXN=100010;
+UT sz[MAXN];
+vector<int> g[MAXN];
+
+UT dfs(int u) {
+    UT size=1;//self
+    for(int i=0; i<g[u].size(); ++i) {
+        size += dfs(g[u][i]);
+    }
+    return (sz[u]=size);
+}
+
+int main(void) {
+    int T, n;
+    scanf("%d", &T);
+    while(T--) {
+        scanf("%d", &n);
+        for(int i=2; i<=n; ++i) {
+            int v;
+            scanf("%d",&v);
+            g[v].push_back(i);
+        }
+        dfs(1);
+        //for(int i=1; i<=n; ++i) printf("?? %lld\n", sz[i]);        
+
+        for(int i=1; i<=n; ++i) {
+            if(i!=1) putchar(' ');
+            UT X = sz[i]-1, sum;
+            sum = X*2+1;
+            for(int j=0; j<g[i].size(); ++j) {
+                sum +=( (X-sz[g[i][j]])*sz[g[i][j]] );
+            }
+            printf("%lld",sum);
+        }
+        puts("");
+        for(int i=0; i<=n; ++i) g[i].clear();
+    }
+    return 0;
+}
+{% endhighlight %}
+
+> 後記：當初為什麼要這麼麻煩，題目都給 parent 了我還在建圖...

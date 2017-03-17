@@ -1,0 +1,96 @@
+---
+layout: post
+title: POJ3292 -- Semi-prime H-numbers
+date: 2017-03-12 11:30
+comments: true
+external-url:
+categories: Math
+---
+
+Semi-prime H-numbers
+
+## 傳送門
+[POJ3292](http://poj.org/problem?id=3292)
+
+## 題目概述
+一個數字是 H-number 的定義是，它是正整數且可以寫成 4n+1 (n為大於等於 0 的整數) 的形式。 H-number 只有三種， unit、H-prime、H-composite， 1 是唯一的 unit ， H-prime 的定義是，若一個 H-number 不是 unit 且只能被分解為以下形式 $$1\times h$$ ，否則，這個數字即為 H-composite。
+
+還有一個定義叫做 H-semi-prime ，就是一個 H-number 可以被洽兩個 H-prime 相乘組成。
+
+現在，給一個 H-number H ，問介於 [1, H] 有多少個 H-semi-prime ？
+
+## 解題想法
+使用篩法，先建出題目範圍內的 H-prime 表，之後就可以快速判斷 H-number 是否為 H-prime。
+要判斷 H-semi-prime ，首先要判斷該 H-number 不是 H-prime ，且該 H-number 整除某個 H-prime 的商必須也是 H-prime ，這樣可以得到 H-semi-prime 的表，之後再用這個表做 Prefix sum ，就可以快速求出區間內的 H-semi-prime 數量。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <vector>
+#include <functional>
+#include <algorithm>
+using namespace std;
+const size_t MAXN=50000;
+bool is_p[MAXN];
+vector<int>plist;
+
+void mk_p() {
+    fill(is_p,is_p+MAXN,false);
+    for(int i=5; i<MAXN; i+=4) is_p[i]=true;
+    for(int i=5; i<MAXN; i+=4) {
+        if(is_p[i]) {
+            plist.push_back(i);
+            for(int j=i+i; j<MAXN; j+=i) is_p[j]=false;
+        }
+    }
+}
+
+inline bool is_prime(int n) {
+    if(n<MAXN) return is_p[n];
+    for(vector<int>::iterator v=plist.begin(); v!=plist.end() && (*v)*(*v)<=n; ++v) {
+        if(n%(*v)==0)return false;
+    }
+    return true;
+}
+inline bool is_hprime(int n) {
+    if(n<MAXN && is_p[n]) return false;
+    for(vector<int>::iterator v=plist.begin(); v!=plist.end() && (*v)*(*v)<=n; ++v) {
+        if(n%(*v)==0 && is_prime(n/(*v)))return true;
+    }
+    return false;
+}
+
+vector<int>is_hp;
+
+void build() {
+    is_hp.clear();
+    is_hp.push_back(0);
+    for(int i=1; i<=1000002; i+=4) is_hp.push_back( is_hprime(i)?1:0 );
+    for(vector<int>::iterator v=is_hp.begin()+1; v!=is_hp.end(); ++v) {
+        *v = *v + *(v-1);
+    }
+}
+int get_psum(int i, int j) {
+    return is_hp.at(j) - is_hp.at(i-1);
+}
+
+int solv(int n) {
+    return get_psum(1, ((n-1)/4)+1);
+}  
+
+int main(void) {
+    int n;
+    mk_p();
+    build();
+    while(scanf("%d",&n)!=EOF && n) {
+        printf("%d %d\n",n , solv(n));
+    }
+    return 0;
+}
+{% endhighlight %}
+
