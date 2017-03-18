@@ -29,4 +29,4 @@ disqus:              "https-peter0749-github-io-contestco"
 markdown:            kramdown
 highlighter:         rouge
 permalink:           none
-gems:                [jekyll-paginate]
+gems:                [jekyll-paginate, jekyll-avatar]
