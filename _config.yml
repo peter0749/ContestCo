@@ -23,7 +23,7 @@ navigation:
   url: /contact
 
 paginate:            5
-disqus:              "disqus_1imqfS5c48"
+disqus:              "https-peter0749-github-io-contestco"
 
 # Build settings
 markdown:            kramdown
