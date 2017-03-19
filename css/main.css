@@ -107,7 +107,7 @@ blockquote p {
 /* page width*/
 @media (max-width: 1366px) {
   .container {
-    width: 60vw;
+    width: 62vw;
   }
 }
 
