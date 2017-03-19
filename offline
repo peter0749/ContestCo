@@ -21,6 +21,8 @@ navigation:
   url: /writing
 - title: 聯絡我
   url: /contact
+- title: 夥伴
+  url: /friend
 
 paginate:            5
 disqus:              "https-peter0749-github-io-contestco"

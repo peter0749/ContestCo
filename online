@@ -3,7 +3,7 @@ title:               "Peter's codebook"
 tagline:             A blog full of codes
 description:
 baseurl:            "/ContestCo"
-url:                "https://peter0749.github.io"
+url:                "http://peter0749.github.io"
 github:
   url:               #"https://lenpaul.github.io/Lagrange"
 author:
@@ -21,6 +21,8 @@ navigation:
   url: /writing
 - title: 聯絡我
   url: /contact
+- title: 夥伴
+  url: /friend
 
 paginate:            5
 disqus:              "https-peter0749-github-io-contestco"
