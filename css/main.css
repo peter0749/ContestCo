@@ -9,6 +9,14 @@ body {
   line-height: 1.75rem;
 }
 
+figure {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 8px;
+    -webkit-margin-end: 8px;
+}
+
 @media (max-width: 30em) {
   body {
     font-size: 14px;
