@@ -1,6 +1,6 @@
 ---
 layout: post
-title: POJ1258 -- Agri-Net
+title: POJ 1258 Agri-Net
 date: 2017-03-03 20:20
 comments: true
 external-url:

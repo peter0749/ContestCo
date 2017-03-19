@@ -1,6 +1,6 @@
 ---
 layout: post
-title: POJ3641 -- Pseudoprime numbers
+title: POJ 3641 Pseudoprime numbers
 date: 2017-03-12 11:30
 comments: true
 external-url:

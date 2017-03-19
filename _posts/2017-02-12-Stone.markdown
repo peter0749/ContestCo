@@ -1,6 +1,6 @@
 ---
 layout: post
-title: IOICamp2017 -- 拿石頭
+title: IOICamp2017 拿石頭
 date: 2017-02-12 22:11
 comments: true
 external-url:
