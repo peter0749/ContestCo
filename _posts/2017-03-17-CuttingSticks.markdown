@@ -233,3 +233,5 @@ int main(void) {
     return 0;
 }
 {% endhighlight %}
+
+一個預先產生好的測資在[這裡](https://gist.github.com/peter0749/8982ab47ebfb22031b8ca43e0994a837)，$$O(N^2)$$ 大約 2s。
