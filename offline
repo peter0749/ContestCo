@@ -25,8 +25,6 @@ navigation:
   url: /contact
 - title: 夥伴
   url: /friend
-- title: 分類
-  url: /tag
 
 paginate:            5
 disqus:              "https-peter0749-github-io-contestco"
