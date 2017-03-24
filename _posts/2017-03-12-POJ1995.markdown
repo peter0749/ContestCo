@@ -4,7 +4,7 @@ title: POJ 1995 Raising Modulo Numbers
 date: 2017-03-12 11:30
 comments: true
 external-url:
-categories: Math
+tags: Math
 ---
 
 Fast pow!

@@ -4,7 +4,7 @@ title: 字串比對
 date: 2017-02-12 14:03
 comments: true
 external-url:
-categories: string
+tags: string
 ---
 
 String matching

@@ -14,6 +14,8 @@ author:
   github:            "peter0749"
   facebook:          "peter0749"
   linkedin:          "光宇-鄭-403958128"
+tag_page_layout: tag_page
+tag_page_dir: tag
 navigation:
 - title: 關於這裡
   url: /about
@@ -23,6 +25,8 @@ navigation:
   url: /contact
 - title: 夥伴
   url: /friend
+- title: 分類
+  url: /tag
 
 paginate:            5
 disqus:              "https-peter0749-github-io-contestco"

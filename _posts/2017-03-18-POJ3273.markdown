@@ -4,7 +4,7 @@ title: POJ 3273 Monthly Expense
 date: 2017-03-17 22:20
 comments: true
 external-url:
-categories: Math
+tags: Binary_Search
 ---
 
 Binary Search

@@ -4,7 +4,7 @@ title: IOICamp2017 貓貓部長
 date: 2017-02-12 22:11
 comments: true
 external-url:
-categories: water
+tags: water
 ---
 
 Meow~

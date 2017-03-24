@@ -4,7 +4,7 @@ title: 基數排序（整數）
 date: 2017-02-19 19:50
 comments: true
 external-url:
-categories: sort
+tags: sort
 ---
 
 Radix Sort!

@@ -4,7 +4,7 @@ title: Nyan
 date: 2017-02-12 22:11
 comments: true
 external-url:
-categories: funny
+tags: funny
 ---
 
 ## NyanNyanNyanNyan

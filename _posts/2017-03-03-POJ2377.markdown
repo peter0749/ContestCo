@@ -4,7 +4,7 @@ title: POJ 2377 Bad Cowtractors
 date: 2017-03-03 20:30
 comments: true
 external-url:
-categories: MST
+tags: MST
 ---
 
 Kruskal!

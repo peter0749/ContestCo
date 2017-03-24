@@ -4,7 +4,7 @@ title: POJ 3579 Median
 date: 2017-03-17 22:20
 comments: true
 external-url:
-categories: Binary_Search
+tags: Binary_Search
 ---
 
 Binary Search

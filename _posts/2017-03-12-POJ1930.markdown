@@ -4,7 +4,7 @@ title: POJ 1930 Dead Fraction
 date: 2017-03-12 11:30
 comments: true
 external-url:
-categories: Math
+tags: Math
 ---
 
 Dead Fraction!

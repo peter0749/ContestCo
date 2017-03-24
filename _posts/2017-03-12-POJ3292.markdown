@@ -4,7 +4,7 @@ title: POJ 3292 Semi-prime H-numbers
 date: 2017-03-12 11:30
 comments: true
 external-url:
-categories: Math
+tags: Math
 ---
 
 Semi-prime H-numbers

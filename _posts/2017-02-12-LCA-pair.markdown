@@ -4,7 +4,7 @@ title: IOICamp2017 最低共同祖先
 date: 2017-02-12 19:55
 comments: true
 external-url:
-categories: tree
+tags: tree
 ---
 
 Lowest Common Ancestor

@@ -4,7 +4,7 @@ title: LeetCode 304 Range Sum Query 2D Immutable
 date: 2017-03-01 14:33
 comments: true
 external-url:
-categories: water
+tags: water
 ---
 
 Range Sum Query 2D - Immutable

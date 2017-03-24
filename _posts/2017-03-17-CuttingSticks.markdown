@@ -4,7 +4,7 @@ title: Uva 10003 Cutting Sticks
 date: 2017-03-12 11:30
 comments: true
 external-url:
-categories: Dynamic_Programming
+tags: Dynamic_Programming
 ---
 
 Cutting Sticks!
