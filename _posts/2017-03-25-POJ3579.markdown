@@ -1,0 +1,113 @@
+---
+layout: post
+title: POJ 3579 Median
+date: 2017-03-17 22:20
+comments: true
+external-url:
+categories: Binary_Search
+---
+
+Binary Search
+
+## 傳送門
+[POJ3579](http://poj.org/problem?id=3579)
+
+## 題目概述
+給定一堆數字，會有 $$\big(^n_{2}\big)$$ 個差。
+問在這些差之中，中位數的值是多少？
+
+## 解題想法
+先將資料排序，並使用一個 deque ，以 $$O(N)$$ 的時間去檢查資料中相差 $$d$$ 以內差的數量，是否可以達到不少於中位數的數量。在這裡定義上述結果為 $$C(d)$$ 。
+
+之後對該 $$C(d)$$ 做二分搜，初始上界為
+
+$$M = max(X_{i})-min(X_{i})$$ 
+
+下界為 -1 ，尋找使得 $$C(d)$$ 為真的上界，該上界就是答案。
+
+總體複雜度 $$O(NlogM)$$。
+
+> 注意：C++ STL 的 Deque 速度不是很理想，可以自己使用兩個指標實作。
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <functional>
+#include <ctime>
+#include <stdexcept>
+using namespace std;
+
+class solver {
+    private:
+        inline int absll(int a) { return a<0?-a:a; }
+        vector<int> data;
+        int tar;
+        inline bool io(void) {
+            int n;
+            if(scanf("%d",&n)==EOF) return false;
+            data.clear();
+            for(int i=0; i!=n; ++i) {
+                int t;
+                scanf("%d",&t);
+                data.push_back(t);
+            }
+            return true;
+        }
+        inline void shu(vector<int> &in) {
+            for(vector<int>::iterator v=in.begin(); v!=in.end(); ++v) {
+                swap( *v, in.at(rand()%in.size()) );
+            }
+        }
+
+        inline bool check( int m) {
+            int counter=0;
+            deque< int>que;
+            int i=0;
+            while (i-que.size()<data.size()) {
+                for(; i<data.size() && (que.empty()||data.at(i)-que.front() <=m) ; ++i) que.push_back(data.at(i));
+                if(!que.empty()) que.pop_front();
+                counter += que.size();
+                if(counter>=this->tar) return true;
+            }
+            return false;
+        }
+        int sol() {
+            sort(data.begin(), data.end());
+            int ub=*max_element(data.begin(), data.end()) - *min_element(data.begin(), data.end());
+            int lb=-1;
+            this->tar = ( ( data.size() * (data.size()-1) )/2 + 1 ) / 2;
+            while(ub-lb>1) {
+                int mid=((lb+ub)>>1);
+                if(check(mid)) {
+                    ub=mid;
+                }
+                else lb=mid;
+            }
+            return ub;
+        }
+    public:
+        inline void solveit() {
+            while(io()) {
+                printf("%d\n",sol());
+            }
+        }
+        solver() {
+            srand(11);
+        }
+};
+
+int main(void) {
+    solver sol;
+    sol.solveit();
+    return 0;
+}
+{% endhighlight %}
+
