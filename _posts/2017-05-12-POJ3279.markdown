@@ -1,0 +1,139 @@
+---
+layout: post
+title: POJ 3279 
+date: 2017-05-12 23:30
+comments: true
+external-url:
+tags: Flip
+---
+
+Flipping
+
+## 傳送門
+
+[POJ3279](http://poj.org/problem?id=3279)
+
+## 將題目消化一下
+
+給一個 2D 陣列，裡面的元素有黑或白兩種顏色，如果在某一點將元素反轉（黑->白; 白->黑），那麼除了本身，上下左右相鄰的元素都會反轉。問使得所有元素都變成白色的最少操作次數且字典序最小的解。
+若無解，輸出"IMPOSSIBLE"。
+
+## 解題想法
+
+因為反轉相同區間 偶數 次，都會轉回原先的狀態。[1]
+
+並且反轉後的結果與選擇反轉位置的順序無關。（例如：照 1,2,3 順序翻和 2,1,3 順序翻是一樣的）。
+
+所以我們可以由上到下、左到右做，先前拜訪的元素都會是翻成白色的。
+
+令 i, j 分別代表元素在 i-th row, j-th column 。
+
+一個簡單的策略，對於位置 i,j 的元素，如果位置 i-1,j 的元素是黑的，那們我們必須（一定）在位置 i,j 反轉一次。
+
+判斷黑白的方式是：
+令要判斷的元素在位置 m, n ，陣列叫做 A 。
+
+若 
+
+$\sum_{v \in m, n 的上下左右和本身}{ 
+    \begin{cases}
+        1 ,& \text{if } A_{v} 不超過陣列範圍且有被反轉\\
+        0 ,& \text{otherwise }
+    \end{cases}
+    }
+    +
+    \begin{cases}
+        1 ,& \text{if } k 初始是反的\\
+        0 ,& \text{otherwise }
+    \end{cases}
+$
+
+是偶數，根據 [1] 的理由，是白色。否則，是黑色。
+
+需要注意的是，不能確定第一列的初始情況（要翻或不翻），所以必須列舉所有情況，並且取最小的那一個。
+
+複雜度 $O \left( MN2^{N} ) \right)$
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+const size_t MAXN(20);
+int opt[MAXN][MAXN], tile[MAXN][MAXN], flip[MAXN][MAXN];
+const int dx[] = {0,1,0,-1,0};
+const int dy[] = {0,0,1,0,-1};
+int N, M;
+
+void init(void) {
+    memset(tile,0x00,sizeof(tile));
+    cin >> M >> N;
+    for (int i=0; i<M; ++i) for (int j=0; j<N; ++j) {
+        cin >> tile[i][j];
+    }
+}
+
+int getAlive(const int x, const int y) {
+    int counter=tile[y][x];
+    for (int d=0; d<5; ++d) {
+        int nx = x+dx[d];
+        int ny = y+dy[d];
+        if (0<=nx && nx<N && 0<=ny && ny<M) {
+            counter += flip[ny][nx];
+        }
+    }
+    return counter&1;
+}
+
+int testTile(void) {
+    for (int i=1; i<M; ++i) {
+        for (int j=0; j<N; ++j) {
+            if (getAlive(j, i-1)) flip[i][j]=1;
+        }
+    }
+    for (int i=0; i<N; ++i) {
+        if (getAlive(i, M-1)) return -1;
+    }
+    int res=0;
+    for (int i=0; i<M; ++i) {
+        for (int j=0; j<N; ++j) {
+            res += flip[i][j];
+        }
+    }
+    return res;
+}
+
+void solv(void) {
+    int res = -1;
+    for (int i=0; i< (1<<N); ++i) {
+        memset(flip,0x00,sizeof(flip)); // no big deal, just remember to initialize it.
+        for (int j=0; j<N; ++j) flip[0][N-j-1] = (i>>j)&1; // iterate over all combination
+        int test = testTile();
+        if (test>=0 && (res==-1 || test<res)) {
+            res = test;
+            memcpy(opt, flip, sizeof(flip));
+        }
+    }
+    if (res==-1) {
+        cout << "IMPOSSIBLE\n";
+        return;
+    }
+    for (int i=0; i<M; ++i) {
+        for (int j=0; j<N; ++j) {
+            cout << opt[i][j] << (j==N-1?'\n':' ');
+        }
+    }
+}
+
+int main(void) {
+    ios::sync_with_stdio(false); cin.tie(0);
+    init();
+    solv();
+    return 0;
+}
+{% endhighlight %}
+
