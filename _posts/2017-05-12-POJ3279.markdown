@@ -44,7 +44,7 @@ $$
     }
     +
     \begin{cases}
-        1 ,& \text{if } A_{m,n} 初始是反的\\
+        1 ,& \text{if } A_{m,n} 初始是黑的\\
         0 ,& \text{otherwise }
     \end{cases}
 $$
