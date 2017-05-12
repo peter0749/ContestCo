@@ -1,6 +1,6 @@
 ---
 layout: post
-title: POJ 3579 Median
+title: POJ 3185 The Water Bowls
 date: 2017-05-12 23:30
 comments: true
 external-url:
