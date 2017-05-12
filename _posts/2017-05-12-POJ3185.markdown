@@ -1,0 +1,90 @@
+---
+layout: post
+title: POJ 3579 Median
+date: 2017-05-12 23:30
+comments: true
+external-url:
+tags: Flip
+---
+
+Flipping
+
+## 傳送門
+
+[POJ3185](http://poj.org/problem?id=3185)
+
+## 題目概述
+
+給你 20 個水盆，剛開始每個水盆可能是上，可能是下。
+我們必須用一次反轉三個相鄰水盆的方式（開頭和結尾位置可以只轉兩個），將所有水盆轉正，請問最少需要轉多少次？
+
+## 解題想法
+
+因為反轉相同區間 `偶數` 次，都會轉回原先的狀態。[1]
+
+並且反轉後的結果與選擇反轉位置的順序無關。（例如：照 1,2,3 順序轉和 2,1,3 順序轉是一樣的）。
+
+所以我們可以由左做到右，左邊的水盆位置都會是已經確定的。
+
+一個簡單的策略，對於位置 i 的水盆，如果位置 i-1 的水盆是反的，那們我們必須（一定）在位置 i 反轉一次。
+
+判斷水盆正反的方式是：
+令要判斷的水盆在位置 k ，
+
+```
+若 (k-1 不超過陣列範圍且 k-1 有被反轉?1:0 + k 有反轉?1:0 + k 初始是反的?1:0) 是偶數，根據 [1] 的理由，水盆是正的。否則，水盆是反的。
+```
+
+如此就能決定第 i 個水盆的反轉，第 i 個水盆是否反轉就確定了，就可以確定第 i+1 的水盆，以此類推。
+
+需要注意的是，不能確定第一個水盆 要翻轉 / 不要翻轉 是最佳解，所以必須兩種都做，並且取最小的那一個。
+
+> 題目保證輸入資料有解
+
+## 程式碼:
+
+{% highlight cpp linenos=table %}
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+int seg[30], flip[30];
+
+void init(void) {
+    for (int i=0; i<20; ++i) cin >> seg[i];
+    seg[20]=0;
+}
+
+inline int check(const int k) {
+    return ( seg[k] + flip[k] + ((k-1>=0)?flip[k-1]:0)  )&1u;
+}
+
+int tryFlip(int c) {
+    int ret;
+    memset(flip,0x00,sizeof(flip));
+    ret=flip[0]=c;
+    for (int i=1; i<20; ++i) { // it is guaranteed that we can always find a solution for the input.
+        if (check(i-1)) { 
+            flip[i]=1;
+            ++ret;
+        }
+    }
+    return ret;
+}
+
+void solv(void) {
+    int res = min(tryFlip(0), tryFlip(1));
+    cout << res << '\n';
+}
+
+int main(void) {
+    ios::sync_with_stdio(false); cin.tie(0);
+    init();
+    solv();
+    return 0;
+}
+{% endhighlight %}
+
