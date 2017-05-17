@@ -89,5 +89,6 @@ inline UT partial_hash(PII *h, PII const &pw, int i, int n) {
 更多例子：
 
 [字串比對](https://peter0749.github.io/ContestCo/String-Matching.html)
+
 [LPS](https://peter0749.github.io/ContestCo/LPS.html)
 
