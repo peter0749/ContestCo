@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [Template] Union Find
+title: Template -- Union Find
 date: 2017-05-18 7:25
 comments: true
 external-url:

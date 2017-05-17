@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [Template] Rolling Hash
+title: Template -- Rolling Hash
 date: 2017-05-18 7:30
 comments: true
 external-url:
