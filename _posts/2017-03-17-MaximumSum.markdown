@@ -4,7 +4,7 @@ title: Uva 108 Maximum Sum
 date: 2017-03-12 11:30
 comments: true
 external-url:
-tags: Dynamic_Programming
+tags: dynamic_programming
 ---
 
 Prefix sum and DP.

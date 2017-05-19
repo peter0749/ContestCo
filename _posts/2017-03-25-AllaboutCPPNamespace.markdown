@@ -4,7 +4,7 @@ title: 關於 C++ Namespace 的那些事
 date: 2017-03-25 15:20
 comments: true
 external-url:
-tags: [C++, Bash, Perl, Regex]
+tags: [c++, bash, perl, regex]
 ---
 
 

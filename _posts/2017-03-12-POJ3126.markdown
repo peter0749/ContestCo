@@ -4,7 +4,7 @@ title: POJ 3126 Prime Path
 date: 2017-03-12 11:30
 comments: true
 external-url:
-tags: Math
+tags: math
 ---
 
 BFS!

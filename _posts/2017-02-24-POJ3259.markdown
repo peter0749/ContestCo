@@ -4,7 +4,7 @@ title: POJ 3259 Wormholes
 date: 2017-02-24 23:02
 comments: true
 external-url:
-tags: Shortest_Path
+tags: shortest_path
 ---
 
 Bellman!?

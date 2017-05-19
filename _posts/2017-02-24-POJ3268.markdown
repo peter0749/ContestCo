@@ -4,7 +4,7 @@ title: POJ 3268 Silver Cow Party
 date: 2017-02-24 23:32
 comments: true
 external-url:
-tags: Shortest_Path
+tags: shortest_path
 ---
 
 Dijkstra!

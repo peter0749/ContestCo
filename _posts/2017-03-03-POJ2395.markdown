@@ -4,7 +4,7 @@ title: POJ 2395 Out of Hay
 date: 2017-03-03 20:30
 comments: true
 external-url:
-tags: MST
+tags: mst
 ---
 
 Kruskal!

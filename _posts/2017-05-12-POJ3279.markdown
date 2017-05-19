@@ -4,7 +4,7 @@ title: POJ 3279 Fliptile
 date: 2017-05-12 23:30
 comments: true
 external-url:
-tags: Flip
+tags: flip
 ---
 
 Flipping
