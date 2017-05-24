@@ -1,0 +1,91 @@
+---
+layout: post
+title: POJ 3977 -- Subset
+date: 2017-05-19 20:00
+comments: true
+external-url:
+tags: union_find
+---
+
+並查集 (Union Find, Disjoin Set... )
+
+## 傳送門
+
+[POJ1703](http://poj.org/problem?id=1703)
+
+## 解題想法
+
+之後補上
+
+## 程式碼
+
+{% highlight cpp linenos=table %}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX_STRL 2048
+#define MAXN 200005
+#define RL() fgets(temp, MAX_STRL, stdin)
+#define WL(X) fputs( (X) , stdout)
+
+int par[MAXN], rank[MAXN];
+int N, M;
+
+void init(void) {
+    int i=((N+1)<<1); // Same gang(N) + Different gang(N) (N*2)
+    while(i--) {
+        par[i]=i;
+        rank[i]=1;
+    }
+}
+
+int find(int u) { return par[u]==u?u:(par[u]=find(par[u])); }
+char same(int u, int v) { return find(u)==find(v)?1:0; }
+void uni(int u, int v) {
+    int x = find(u);
+    int y = find(v);
+    if (x==y) return;
+    if (rank[x]<rank[y]) {
+        par[x] = y;
+    } else {
+        if (rank[x]==rank[y])
+            ++rank[x];
+        par[y] = x;
+    }
+}
+
+int main(void) {
+    char temp[MAX_STRL];
+    int T;
+    RL();
+    T = atoi(temp);
+    while (T-->0) {
+        RL();
+        sscanf(temp, "%d %d", &N, &M);
+        init();
+        int i=0;
+        for (i=0; i<M; ++i) {
+            RL();
+            int u, v;
+            char op;
+            sscanf(temp, "%1c %d %d", &op, &u, &v);
+            switch (op) {
+                case 'D':
+                    uni(u,v+N); uni(u+N, v); // assign to different gangs
+                    break;
+                default:
+                    if (same(u,v)||same(u+N,v+N))  // test if same
+                        WL ( "In the same gang.\n" );
+                    else if (same(u,v+N)||same(u+N,v)) // test if different
+                        WL ( "In different gangs.\n" );
+                    else
+                        WL ( "Not sure yet.\n" ); // undetermined
+                    break;
+            }
+        }
+    }
+    return 0;
+}
+
+{% endhighlight %}
+
