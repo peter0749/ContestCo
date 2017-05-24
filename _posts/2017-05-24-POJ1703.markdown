@@ -1,7 +1,7 @@
 ---
 layout: post
-title: POJ 3977 -- Subset
-date: 2017-05-19 20:00
+title: POJ 1703 -- Find them, Catch them
+date: 2017-05-24 10:00
 comments: true
 external-url:
 tags: union_find
