@@ -13,10 +13,6 @@ tags: union_find
 
 [POJ1703](http://poj.org/problem?id=1703)
 
-## 解題想法
-
-之後補上
-
 ## 程式碼
 
 {% highlight cpp linenos=table %}
