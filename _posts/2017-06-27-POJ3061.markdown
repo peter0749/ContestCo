@@ -1,7 +1,7 @@
 ---
 layout: post
 title: POJ 3061 -- Subsequence
-date: 2017-05-24 10:00
+date: 2017-06-27 10:00
 comments: true
 external-url:
 tags: 2pointers
