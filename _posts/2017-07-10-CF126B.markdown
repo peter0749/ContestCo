@@ -1,0 +1,106 @@
+---
+layout: post
+title: CodeForces 126B -- Password 
+date: 2017-07-10 22:00
+comments: true
+external-url:
+tags: string
+---
+
+Rolling Hash (Rabin-Karp) + 二分搜
+
+題目要找到最長
+
+（含開頭子字串 == 含結尾子字串 == 中間子字串（不含頭尾的））
+ 的子字串
+
+可以使用 Rolling Hash 快速查詢區間的子字串是否相同。
+
+先花費 $$O(n)$$ 的時間找到所有合法的（開頭字串 == 結尾字串）子字串，
+之後利用這些子字串的長度，對中間子字串做二分搜，尋找使得中間子字串合法且長度最大的子字串。
+
+總體複雜度約 $$O(nlgn)$$
+
+> 現在還還弱弱的，字串題只會用 Hash 隨便做
+
+## 傳送門
+
+[CF126B](http://codeforces.com/contest/126/problem/B)
+
+## 程式碼
+
+{% highlight cpp linenos=table %}
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define PB push_back
+#define F first
+#define S second
+typedef long long int UT;
+typedef pair< UT, UT > PII;
+const PII p(311,337), q(1e9+7, 1e9+87);
+const int MAXN(1000100);
+PII h[MAXN], lookup[MAXN];
+
+inline void get_pow(PII *h, const int n) {
+    h[0].F=h[0].S=1;
+    for(int i=1; i<=n; ++i) {
+        h[i].F = (h[i-1].F*p.F)%q.F;
+        h[i].S = (h[i-1].S*p.S)%q.S;
+    }
+}
+
+inline void get_hash(string &s, PII *h) {
+    // rev 代表是否要反向建 Hash
+    h[0].F=h[0].S=h[s.length()+1].S=h[s.length()+1].F=0;
+    ++h; // index is shifted
+    for(int i=0; i!=s.length(); ++i ){
+        h[i].F = ((h[i-1].F*p.F%q.F)+(UT)(s[i]-'a')+1)%q.F;
+        h[i].S = ((h[i-1].S*p.S%q.S)+(UT)(s[i]-'a')+1)%q.S;
+    }
+}
+
+// pw 代表 在 get_pow() 得到的 hash 值
+// 下面的函數用來取得 從原字串 i 位置開始長度 n 子字串的 hash 值
+inline PII partial_hash(PII *h, int i, int n) {
+    h++; //shift index
+    UT temp1, temp2;//Lazy dog...
+    temp1 = ((q.F - h[i-1].F*lookup[n].F%q.F) + h[i+n-1].F)%q.F;
+    temp2 = ((q.S - h[i-1].S*lookup[n].S%q.S) + h[i+n-1].S)%q.S;
+    return make_pair(temp1, temp2);
+}
+
+string stone;
+vector<int> potential;
+
+inline bool check(int n) {
+    return (partial_hash(h, 0, n)==partial_hash(h, stone.length()-n, n));
+}
+
+bool check2(int n) {
+    for (int i=1; i+n<stone.length(); ++i) if (partial_hash(h, 0, n)==partial_hash(h, i, n)) return true;
+    return false;
+}
+
+int main(void) {
+    cin >> stone;
+    get_pow(lookup, stone.length());
+    get_hash(stone, h);
+    for (int i=1; i<=stone.length(); ++i) {
+        if (check(i)) potential.push_back(i);
+    }
+    
+    int l=-1, r=potential.size();
+    while(r-l>1) {
+        int m = (l+r)>>1;
+        if (check2(potential[m])) l = m;
+        else r = m;
+    }
+    if (l==-1) cout << "Just a legend" << endl;
+    else cout << stone.substr(0, potential[l]) << endl;
+    return 0;
+}
+
+{% endhighlight %}
+
