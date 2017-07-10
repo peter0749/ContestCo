@@ -18,6 +18,7 @@ const size_t TREENN=MAXN*TREEND;
 int  seg[TREENN]; // neg, pos
 int lazy[TREENN];  // neg, pos
 
+//#define HALF_OPEN_INTERVAL
 #define LEFT(i) ((i)<<1)
 #define RIGHT(i) ((i)<<1|1)
 
@@ -39,8 +40,15 @@ inline void init(int n, int *seg, int *lazy) {
     memset(lazy, 0x00, sizeof(lazy[0])*(n+1));
 }
 
+#ifndef HALF_OPEN_INTERVAL
+// 節點紀錄閉區間
 #define IN_RANGE (qL<=L && qR>=R)
 #define OO_RANGE (L>qR || R<qL)
+#else
+// 節點紀錄半開區間 [, )
+#define IN_RANGE (qL<L && qR>R)
+#define OO_RANGE (L>=qR || R<=qL)
+#endif
 
 inline void _push(int lev, int seg[], int lazy[]) {
     if (!lazy[lev]) return;
@@ -79,7 +87,11 @@ void update(int L, int R, int qL, int qR, int lev, int op, int seg[], int lazy[]
     }
     _push(lev, seg, lazy);
     update(L, M, qL, qR, LEFT(lev), op, seg, lazy);
+#ifndef HALF_OPEN_INTERVAL
     update(M+1, R, qL,qR, RIGHT(lev),op,seg, lazy);
+#else
+    update(M, R, qL,qR, RIGHT(lev),op,seg, lazy);
+#endif
     _pull(lev, seg);
 }
 
@@ -90,7 +102,11 @@ int query(int L, int R, int qL, int qR, int flag, int seg[], int lazy[]) {
     _push(flag, seg, lazy);
     int left=0, right=0;
     left = query(L,M,qL,qR,LEFT(flag),seg,lazy);
+#ifndef HALF_OPEN_INTERVAL
     right = query(M+1,R,qL,qR,RIGHT(flag),seg,lazy);
+#else
+    right = query(M,R,qL,qR,RIGHT(flag),seg,lazy);
+#endif
     _pull(flag, seg); // if update (optional)
     return seg[flag]; // if update (optional)
     //return operationOnPull<int>(left, right); // not update
