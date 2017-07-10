@@ -1,0 +1,111 @@
+---
+layout: post
+title: POJ 1845 -- Sumdiv
+date: 2017-07-10 21:00
+comments: true
+external-url:
+tags: math
+---
+
+質因數分解 + 模運算 + 等比級數
+
+## 解法
+
+先求出題目中 A 的質因數分解，
+每個 A 的因數和可以用以下公式求得：
+
+$$ \sum_{a_{i}, b_{i} \include A_{QF}}{ \dfrac {a_{i}^{b_{i}+1} - 1}{a_{i}-1} }  $$
+
+其中， $$ a_{i}, b_{i} $$ 分別代表 A 的質因數、對應的次方，要算出 $$ \sum $$ 裡面的值，需要在取模底下做運算，所以需要模反元素、模底下的快速冪。
+
+但是這種運算，在某些情況下，取模計算 $$ a_{i}^{b_{i}+1} $$ 有可能輸出 1 （非法），
+
+這種情況，不可以直接像上面計算等差級數，就必須遞迴解等差級數。
+
+計算方式在程式碼中。 (summ 函式)
+
+## 傳送門
+
+[POJ1845](http://poj.org/problem?id=1845)
+
+## 程式碼
+
+{% highlight cpp linenos=table %}
+
+#include <cstdio>
+#include <assert.h>
+#include <cstdlib>
+#include <iostream>
+#include <map>
+using namespace std;
+const int M = 9901;
+
+map<int,int> pd(int n) {
+    map<int,int> r;
+    for(int i=2; i*i<=n; ++i) {
+        while(n%i==0) {
+            ++r[i];
+            n/=i;
+        }
+    }
+    if(n!=1) r[n]=1;
+    return r;
+}
+
+int fast_pow(int x, long long int n) {
+    int res = 1%M;
+    int base = x%M;
+    n %= (long long int)(M-1);
+    while(n>0L) {
+        if (n&1L) {
+            res = res * base % M;
+        }
+        base = base * base % M;
+        n >>= 1L;
+    }
+    return res%M;
+}
+
+inline int inv_M(int a) {
+    return fast_pow(a, M-2);
+}
+
+int summ(int a, int n) {
+    if (n==0) return 1L;
+    if (n%2L) { // 奇數
+        return summ(a, n>>1L) * (1 + fast_pow(a, n/2+1)) % M;
+    } 
+    return (summ(a, (n>>1L)-1L) * (1 + fast_pow(a, n/2+1)) %M + fast_pow(a, n/2)) % M;
+}
+
+inline int cal(const int &a, const int &b, const int &n) {
+    long long int p = (long long int)n * (long long int)b;
+    int ar = fast_pow(a, p+1L);
+    if (ar==1) return summ(a, p); // fails
+    return ((ar - 1 + M)%M) * inv_M((a-1+M)%M) %M;
+}
+
+inline int solv(int A, int B) {
+    int res=1;
+    if (A==0) return 0;
+    if (B==0) return 1;
+    //A%=M;
+    map<int, int> fac(pd(A));
+    for (map<int,int>::iterator v=fac.begin(); v!=fac.end(); ++v) {
+        //cout << v->first << ':' << v->second << endl;
+        res = res * cal(v->first%M, v->second, B) % M;
+    }
+
+    return res;
+}
+
+int main(void) {
+    int A, B;
+    while(scanf("%d%d", &A, &B)==2) {
+        printf("%d\n", solv(A,B));
+    }
+    return 0;
+}
+
+{% endhighlight %}
+
