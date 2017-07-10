@@ -41,7 +41,7 @@ inline void init(int n, int *seg, int *lazy) {
 }
 
 #ifndef HALF_OPEN_INTERVAL
-// 節點紀錄閉區間
+// 節點紀錄閉區間   [, ]
 #define IN_RANGE (qL<=L && qR>=R)
 #define OO_RANGE (L>qR || R<qL)
 #else
