@@ -73,15 +73,12 @@ inline void get_hash(string &s, PII *h, bool rev=false) {
 
 // pw 代表 在 get_pow() 得到的 hash 值
 // 下面的函數用來取得 從原字串 i 位置開始長度 n 子字串的 hash 值
-inline UT partial_hash(PII *h, PII const &pw, int i, int n) {
+inline pair<UT,UT> partial_hash(PII *h, PII const &pw, int i, int n) {
     h++; //shift index
     UT temp1, temp2;//Lazy dog...
     temp1 = ((q.F - h[i-1].F*pw.F%q.F) + h[i+n-1].F)%q.F;
     temp2 = ((q.S - h[i-1].S*pw.S%q.S) + h[i+n-1].S)%q.S;
-    if (temp1!=temp2) {
-        return -1;
-        // 失敗了，在外面做其他事情解決它
-    } else return temp1;
+    return make_pair(temp1, temp2);
 }
 
 {% endhighlight %}
