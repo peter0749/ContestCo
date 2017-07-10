@@ -46,7 +46,7 @@ inline void init(int n, int *seg, int *lazy) {
 #define OO_RANGE (L>qR || R<qL)
 #else
 // 節點紀錄半開區間 [, )
-#define IN_RANGE (qL<L && qR>R)
+#define IN_RANGE (qL<=L && qR>=R)
 #define OO_RANGE (L>=qR || R<=qL)
 #endif
 
