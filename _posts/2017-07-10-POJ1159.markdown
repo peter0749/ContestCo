@@ -1,0 +1,64 @@
+---
+layout: post
+title: POJ 1159 -- Palindrome
+date: 2017-07-10 21:00
+comments: true
+external-url:
+tags: string
+---
+
+反向 LCS
+
+因為找到反向字串與原字串的 LCS ，就代表找到原字串中，最長的回文子序列，
+將這個 LCS 長度減去原字串長 == 最少要插入的字元，使得整個字串變成回文。
+
+
+> 需要留意記憶體大小
+
+## 傳送門
+
+[POJ1159](http://poj.org/problem?id=1159)
+
+## 程式碼
+
+{% highlight cpp linenos=table %}
+
+#pragma GCC optimize("Os")
+#pragma GCC target ("avx")
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+#include <string>
+#include <cstring>
+
+using namespace std;
+
+unsigned short dp[5010][5010];
+int N;
+string s;
+
+inline int solv() {
+    memset(dp, 0x00, sizeof(dp));
+    for (int i=1; i<=N; ++i) {
+        for (int j=1; j<=N; ++j) {
+            if (s[i-1]==s[N-j]) dp[i][j] = dp[i-1][j-1]+1;
+            else {
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+    int maxv=0;
+    for (int i=1; i<=N; ++i) for (int j=1; j<=N; ++j) maxv=max(maxv,(int)dp[i][j]);
+    return N-maxv;
+}
+
+int main(void) {
+    cin >> N;
+    cin >> s;
+    cout << solv() << endl;
+    return 0;
+}
+
+
+{% endhighlight %}
+
