@@ -26,8 +26,9 @@ tags: geometry
 
 也就是說，
 
-$$x_{i+1} = x_{i} - \dfrac{f(x,y)}{ dx }  $$
-$$y_{i+1} = y_{i} - \dfrac{f(x,y)}{ dy }  $$
+$$x_{i+1} = x_{i} - \dfrac{f(x_{i},y_{i})}{ dx }  $$
+
+$$y_{i+1} = y_{i} - \dfrac{f(x_{i},y_{i})}{ dy }  $$
 
 將 x, y 往 f(x,y) 較低的位置更新。
 
