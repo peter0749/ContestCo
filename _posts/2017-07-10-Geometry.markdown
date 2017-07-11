@@ -1,0 +1,73 @@
+---
+layout: post
+title: Template -- Segment Tree
+date: 2017-07-11 0:20
+comments: true
+external-url:
+tags: geometry
+---
+
+## 基礎幾何模板
+
+
+{% highlight cpp linenos=table %}
+
+#include <cmath>
+#include <complex>
+#include <valarray>
+
+// not seperate *.h and *.cpp
+// for convenience in contest
+
+template<class T>
+class GeoVec {
+    public:
+        T x, y;
+        GeoVec() {}
+        GeoVec(const T &x, const T &y) : x(x), y(y) {}
+        GeoVec(const GeoVec &copy) : x(copy.x), y(copy.y) {}
+        const GeoVec operator*(T a) const { return GeoVec(x*a,y*a); }
+        const GeoVec operator/(T a) const { return GeoVec(x/a,y/a); }
+        static const T L1(const GeoVec &a) {
+            return sqrtl(a.x*a.x - a.y*a.y);
+        }
+        static const T L2(const GeoVec &a) {
+            return (a.x*a.x - a.y*a.y);
+        }
+        const GeoVec rot(T rad) const {
+            using std::cos;
+            using std::sin;
+            return GeoVec(cos(rad)*x-sin(rad)*y, sin(rad)*x+cos(rad)*y);
+        }
+        const GeoVec unitVec(void) const { return (*this/(GeoVec<T>::L1(*this))); }
+        const GeoVec tVec(void) const { return GeoVec(-y, x); }
+};
+// all public for convenient in contest
+// following are operator overload for template class GeoVec
+template<class T>
+const GeoVec<T> operator+(const GeoVec<T> &first, const GeoVec<T> &second) {
+    return GeoVec<T>(first.x+second.x, first.y+second.y);
+}
+
+template<class T>
+const GeoVec<T> operator-(const GeoVec<T> &first, const GeoVec<T> &second) {
+    return GeoVec<T>(first.x-second.x, first.y-second.y);
+}
+
+template<class T>
+const T operator*(const GeoVec<T> &first, const GeoVec<T> &second) {
+    // dot product
+    return (first.x*second.x + first.y*second.y);
+}
+
+template<class T>
+const T operator%(const GeoVec<T> &first, const GeoVec<T> &second) {
+    // cross product
+    return (first.x*second.y - first.y*second.x);
+}
+
+
+
+{% endhighlight %}
+
+
