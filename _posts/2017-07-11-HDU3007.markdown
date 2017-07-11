@@ -1,0 +1,130 @@
+---
+layout: post
+title: HDU 3007 -- Buried memory
+date: 2017-07-11 23:30
+comments: true
+external-url:
+tags: geometry
+---
+
+梯度下降法
+
+## 解法
+
+使用梯度下降法。
+
+先定義目標函式：給一平面上座標，輸出該座標與平面上最遠點的距離平方。
+
+我們的任務是將其最小化。
+
+梯度下降：
+
+先隨便選一點，作為起點，向 +x, +y 方向分別跨一小步，
+再評估向 +x, +y 移動的目標函式，是否有進步？有則將起點往正向更新位置，否則往反向更新位置。
+
+簡單來說，就是利用 x, y 方向的偏微分，往負的梯度方向前進，就能夠帶我們前往更深的地方（使得目標函式的輸出最小化）。
+
+也就是說，
+
+$$x_{i+1} = x_{i} - \dfrac{f(x,y)}{ dx }  $$
+$$y_{i+1} = y_{i} - \dfrac{f(x,y)}{ dy }  $$
+
+將 x, y 往 f(x,y) 較低的位置更新。
+
+## 傳送門
+
+[HDU3007](http://acm.hdu.edu.cn/showproblem.php?pid=3007)
+
+## 程式碼
+
+{% highlight cpp linenos=table %}
+
+#pragma GCC target ("avx")
+#pragma GCC optimize ("O3")
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+using namespace std;
+
+vector< pair<double,double> > cord;
+
+inline double l2(double x, double y) {
+    double maxv = 0;
+    for (vector< pair<double,double> >::iterator v=cord.begin(); v!=cord.end(); ++v) {
+        double dx = v->first-x;
+        double dy = v->second-y;
+        maxv = max(maxv, dx*dx+dy*dy);
+    }
+    return maxv; 
+}
+
+inline double l1(double x, double y) {
+    double maxv = 0;
+    for (vector< pair<double,double> >::iterator v=cord.begin(); v!=cord.end(); ++v) {
+        double dx = v->first-x;
+        double dy = v->second-y;
+        maxv = max(maxv, sqrt(dx*dx+dy*dy));
+    }
+    return maxv; 
+}
+
+pair< pair<double, double> , double> brute(int ite, int early_stop=1e9) {
+    double initx, inity;
+    double eps = 1;
+    double momentum = 0.9;
+    double delta = 0.95;
+    initx = ((double)rand()*2e10/(double)RAND_MAX)-1e10;
+    inity = ((double)rand()*2e10/(double)RAND_MAX)-1e10;
+
+    double ori=1e9;
+    double min_loss = ori;
+    int not_improved = 0;
+    for (int i=0; i<ite && not_improved<early_stop; ++i) {
+        eps*=delta;
+        ori= l2(initx, inity);
+        if (ori < min_loss) {
+            min_loss = ori;
+            not_improved = 0;
+        } else {
+            ++not_improved;
+        }
+        double tx = l2(initx+eps, inity);
+        double ty = l2(initx, inity+eps);
+        initx+=(ori-tx)*momentum;
+        inity+=(ori-ty)*momentum;
+    }
+    return make_pair( make_pair(initx, inity), l1(initx,inity));
+}
+
+#define RL() fgets(buff, 4000, stdin)
+
+int main(void) {
+    srand(time(NULL));
+    int N;
+    char buff[4096];
+    while((RL())!=NULL) {
+        sscanf(buff, "%d", &N);
+        if (N==0) break;
+        cord.clear();
+        for (int i=0; i<N; ++i) {
+            double x, y;
+            RL();
+            sscanf(buff,"%lf%lf", &x, &y);
+            cord.push_back(make_pair(x,y));
+        }
+        pair< pair<double,double> , double> res = brute(1010, 200);
+        printf("%.2lf %.2lf %.2lf\n" , res.first.first, res.first.second, res.second);
+    }
+
+    return 0;
+}
+
+{% endhighlight %}
+
