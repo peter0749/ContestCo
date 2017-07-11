@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Template -- Segment Tree
+title: Template -- Geometry
 date: 2017-07-11 9:20
 comments: true
 external-url:
