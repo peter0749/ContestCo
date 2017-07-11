@@ -129,3 +129,105 @@ int main(void) {
 
 {% endhighlight %}
 
+## 附錄
+
+會吃 TLE 的 退火版
+
+
+
+{% highlight cpp linenos=table %}
+#pragma GCC target ("avx2")
+#pragma GCC optimize ("O3")
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+using namespace std;
+
+vector< pair<double,double> > cord;
+
+inline double l2(double x, double y) {
+    double maxv = 0;
+    for (vector< pair<double,double> >::iterator v=cord.begin(); v!=cord.end(); ++v) {
+        double dx = v->first-x;
+        double dy = v->second-y;
+        maxv = max(maxv, dx*dx+dy*dy);
+    }
+    return maxv;
+}
+
+inline double l1(double x, double y) {
+    double maxv = 0;
+    for (vector< pair<double,double> >::iterator v=cord.begin(); v!=cord.end(); ++v) {
+        double dx = v->first-x;
+        double dy = v->second-y;
+        maxv = max(maxv, sqrt(dx*dx+dy*dy));
+    }
+    return maxv;
+}
+
+// 模擬退火
+pair< pair<double, double> , double> brute(double ite=1e9L,const int early_stop=1e9, const double delta=0.99L, const double coolest=1e-4) {
+    double initx, inity;
+
+    int idx = rand()%cord.size();
+    initx = cord[idx].first;
+    inity = cord[idx].second; // 初始點
+
+    double min_loss = l2(initx, inity); // 初始誤差
+    int not_improved = 0;
+    while (ite > coolest && not_improved<early_stop) { // 停止條件：若溫度太低 or 超過 not_imported 次數未進步，則停止
+        //cout << fixed << setprecision(2) << initx << ' ' << inity << ' ' << min_loss << endl;
+        double rd = ((double)rand()/(double)RAND_MAX)*M_PI*2.0L; // 隨機的向量方向 [0, 2*pi)
+        double tx = initx + ite*cos(rd), ty = inity + ite*sin(rd); // 原來位置 + 隨機取一向量*(向量長度 == 溫度)
+        double loss = l2(tx, ty);
+        if (loss < min_loss) {
+            initx = tx;
+            inity = ty;
+            min_loss = loss;
+            not_improved = 0;
+        } else {
+            ite*=delta;
+            ++not_improved;
+        }
+    }
+    double res = l1(initx,inity);
+    if (abs(initx)<0.005L) initx=0.0L;
+    if (abs(inity)<0.005L) inity=0.0L;
+    if (abs(res)<0.005L) res=0.0L;
+    return make_pair( make_pair(initx, inity), res);
+}
+
+#define RL() fgets(buff, 4000, stdin)
+
+int main(void) {
+    srand(time(NULL));
+    int N;
+    char buff[4096];
+    while((RL())!=NULL) {
+        double max_measure=0;
+        sscanf(buff, "%d", &N);
+        if (N==0) break;
+        cord.clear();
+        for (int i=0; i<N; ++i) {
+            double x, y;
+            RL();
+            sscanf(buff,"%lf%lf", &x, &y);
+            cord.push_back(make_pair(x,y));
+            max_measure = max(max_measure, abs(x));
+            max_measure = max(max_measure, abs(y));
+        }
+        pair< pair<double,double> , double> res = brute(1e12);
+        printf("%.2lf %.2lf %.2lf\n" , res.first.first, res.first.second, res.second);
+    }
+
+    return 0;
+}
+{% endhighlight%}
