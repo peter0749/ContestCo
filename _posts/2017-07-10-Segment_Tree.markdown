@@ -20,7 +20,7 @@ struct SegmentTree {
     int  seg[TREENN]; // neg, pos
     int lazy[TREENN];  // neg, pos
 
-//#define HALF_OPEN_INTERVAL
+#define HALF_OPEN_INTERVAL
 #define LEFT(i) ((i)<<1)
 #define RIGHT(i) ((i)<<1|1)
 
@@ -36,11 +36,11 @@ struct SegmentTree {
             // example: return a + b;
         }
 
-    inline void init(int n, int *seg, int *lazy) {
+    inline void init(int n) {
         using std::memset;
         n*=TREEND;
-        memset(seg, 0x00, sizeof(seg[0])*(n+1));
-        memset(lazy, 0x00, sizeof(lazy[0])*(n+1));
+        memset(this->seg, 0x00, sizeof(this->seg[0])*(n+1));
+        memset(this->lazy, 0x00, sizeof(this->lazy[0])*(n+1));
     }
 
 #ifndef HALF_OPEN_INTERVAL
@@ -53,7 +53,7 @@ struct SegmentTree {
 #define OO_RANGE (L>=qR || R<=qL)
 #endif
 
-    inline void _push(int lev, int seg[], int lazy[]) {
+    inline void _push(int lev) {
         if (!lazy[lev]) return;
 
         // !!!make sure this node's information is updated before enter here!!!
@@ -69,13 +69,13 @@ struct SegmentTree {
     }
 
     // 更新
-    inline void _pull(int lev, int seg[]) {
+    inline void _pull(int lev) {
         // update self
         // pull from left child and right child
         // example: seg[lev] = operationOnPull<int>(seg[LEFT(lev)] , seg[RIGHT(lev)]);
     }
 
-    void update(int L, int R, int qL, int qR, int lev, int op, int seg[], int lazy[]) {
+    void update(int L, int R, int qL, int qR, int lev, int op) {
         if (OO_RANGE) return;
         int M = (L+R)>>1;
         if (IN_RANGE) {
@@ -88,29 +88,29 @@ struct SegmentTree {
             lazy[lev] = op; // lazy tag
             return;
         }
-        _push(lev, seg, lazy);
-        update(L, M, qL, qR, LEFT(lev), op, seg, lazy);
+        _push(lev);
+        update(L, M, qL, qR, LEFT(lev), op);
 #ifndef HALF_OPEN_INTERVAL
-        update(M+1, R, qL,qR, RIGHT(lev),op,seg, lazy);
+        update(M+1, R, qL,qR, RIGHT(lev),op);
 #else
-        update(M, R, qL,qR, RIGHT(lev),op,seg, lazy);
+        update(M, R, qL,qR, RIGHT(lev),op);
 #endif
-        _pull(lev, seg);
+        _pull(lev);
     }
 
-    int query(int L, int R, int qL, int qR, int flag, int seg[], int lazy[]) {
+    int query(int L, int R, int qL, int qR, int flag) {
         int M=(L+R)>>1;
         if (OO_RANGE) return 0; // 沒東西
         if (IN_RANGE) return seg[flag];
-        _push(flag, seg, lazy);
+        _push(flag);
         int left=0, right=0;
-        left = query(L,M,qL,qR,LEFT(flag),seg,lazy);
+        left = query(L,M,qL,qR,LEFT(flag));
 #ifndef HALF_OPEN_INTERVAL
-        right = query(M+1,R,qL,qR,RIGHT(flag),seg,lazy);
+        right = query(M+1,R,qL,qR,RIGHT(flag));
 #else
-        right = query(M,R,qL,qR,RIGHT(flag),seg,lazy);
+        right = query(M,R,qL,qR,RIGHT(flag));
 #endif
-        _pull(flag, seg); // if update (optional)
+        _pull(flag); // if update (optional)
         return seg[flag]; // if update (optional)
         //return operationOnPull<int>(left, right); // not update
     }
@@ -120,8 +120,6 @@ struct SegmentTree {
 #undef RIGHT
 #undef HALF_OPEN_INTERVAL
 };
-
-
 
 {% endhighlight %}
 
