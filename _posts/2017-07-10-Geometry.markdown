@@ -43,7 +43,7 @@ class GeoVec {
         const GeoVec tVec(void) const { return GeoVec(-y, x); }
 };
 // all public for convenient in contest
-// following are operator overloading for template class GeoVec
+// following are operator overloading for class template GeoVec
 template<class T>
 const GeoVec<T> operator+(const GeoVec<T> &first, const GeoVec<T> &second) {
     return GeoVec<T>(first.x+second.x, first.y+second.y);
