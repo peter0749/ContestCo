@@ -4,7 +4,7 @@ title: POJ 1151 -- Atlantis
 date: 2017-07-12 23:00
 comments: true
 external-url:
-tags: segment_tree
+tags: rmq, segment_tree
 ---
 
 ## 解法
