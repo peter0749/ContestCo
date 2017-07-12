@@ -4,7 +4,7 @@ title: POJ 3277 -- City Horizon
 date: 2017-07-10 21:00
 comments: true
 external-url:
-tags: rmq
+tags: rmq, segment_tree
 ---
 
 線段樹

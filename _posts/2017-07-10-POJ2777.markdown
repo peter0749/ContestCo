@@ -4,7 +4,7 @@ title: POJ 2777 -- Count Color
 date: 2017-07-10 21:00
 comments: true
 external-url:
-tags: rmq
+tags: rmq, segment_tree
 ---
 
 線段樹，要維護的是區間內含有的顏色種類。
