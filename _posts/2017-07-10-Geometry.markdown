@@ -29,7 +29,7 @@ class GeoVec {
         const GeoVec operator*(T a) const { return GeoVec(x*a,y*a); }
         const GeoVec operator/(T a) const { return GeoVec(x/a,y/a); }
         static const T L1(const GeoVec &a) {
-            return sqrtl(a.x*a.x - a.y*a.y);
+            return std::sqrt(a.x*a.x - a.y*a.y);
         }
         static const T L2(const GeoVec &a) {
             return (a.x*a.x - a.y*a.y);
