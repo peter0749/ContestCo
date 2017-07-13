@@ -11,9 +11,15 @@ tags: string, hash
 
 Rolling Hash (Rabin-Karp)
 
-詢問每個 A, B 長度為 A, B 公因數的子字串是否可以重組為 A, B
+給 A, B 兩字串，
+
+詢問每個長度為 A, B 字串長度公因數的子字串
+
+是否可以藉由複製自己多次，重組為 A, B
 
 且是否都為 A, B 的共同子字串。
+
+用 $$O(N)$$ 時間枚舉每個公因數長度子字串， $$O(lgN)$$ 檢查是否合法。
 
 
 ## 傳送門
@@ -128,7 +134,6 @@ int main(void) {
     int counter = 0;
     pair<UT,UT> ta = ah.partial_hash(0, a.length());
     pair<UT,UT> tb = bh.partial_hash(0, b.length());
-    //cout << gcdab << endl;
     for (vector<int>::iterator v=cd.begin(); v!=cd.end(); ++v) {
         const int &i = *v;
         pair<UT,UT> ppa = ah.extend_self(0, i, a.length()/i);
