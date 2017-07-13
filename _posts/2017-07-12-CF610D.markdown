@@ -1,6 +1,6 @@
 ---
 layout: post
-title: POJ 1151 -- Atlantis
+title: CodeForces 610D -- Vika and Segments
 date: 2017-07-12 23:00
 comments: true
 external-url:
@@ -16,6 +16,7 @@ tags: rmq, segment_tree
 
 這題比 [POJ1151](http://poj.org/problem?id=1151) 更困難一些。
 
+差別在於這題輸入是閉區間，還有測資範圍比較大。
 
 ## 傳送門
 
