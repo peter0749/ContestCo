@@ -21,6 +21,20 @@ Rolling Hash (Rabin-Karp)
 
 用 $$O(N)$$ 時間枚舉每個公因數長度子字串， $$O(lgN)$$ 檢查是否合法。
 
+### 快速求取複製字串的方法：
+
+利用 Rolling Hash 性質：
+
+假設原字串 Hash 為 $$A$$ ，字串長為 $$n$$ ，那麼
+
+$$ A^{2} = \left( A + 1 \right) \times base^{n} \big( mod P \big) $$
+
+其中，$$base$$ 為 hash 使用的基底，$$P$$ 為 hash 使用的模數 $$A^{2}$$ 為字串 A 重複 2 遍的 hash 結果。
+
+可以利用上面的性質，和快速冪的概念實作出，
+
+在 $$(lgN)$$ 時間內取得 A 重複 N 遍的 hash 值。
+
 
 ## 傳送門
 
