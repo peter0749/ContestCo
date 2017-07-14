@@ -15,6 +15,7 @@ tags: geometry
 #include <cmath>
 #include <complex>
 #include <valarray>
+#include <functional>
 
 // not seperate *.h and *.cpp
 // for convenience in contest
@@ -29,10 +30,10 @@ class GeoVec {
         const GeoVec operator*(T a) const { return GeoVec(x*a,y*a); }
         const GeoVec operator/(T a) const { return GeoVec(x/a,y/a); }
         static const T L1(const GeoVec &a) {
-            return std::sqrt(a.x*a.x - a.y*a.y);
+            return std::sqrt(a.x*a.x + a.y*a.y);
         }
         static const T L2(const GeoVec &a) {
-            return (a.x*a.x - a.y*a.y);
+            return (a.x*a.x + a.y*a.y);
         }
         const GeoVec rot(T rad) const {
             using std::cos;
@@ -56,11 +57,10 @@ class GeoVec {
             // 面積 / 底 = 高（點到直線距離）
         }
         // 求 a1xb1y+c1=0, a2xb2y+c2=0 交點
-        static pair<T,T> twoLineSec(T a1, T b1, T c1, T a2, T b2, T c2) {
-            // 小心除 0 
-            pair<T,T> res;
-            res.second = (c1*a2-a1*c2) / (b1*a2-b2*a1);
-            res.first  = (c1*b2-c2*b1) / (a1*b2-b1*a1);
+        static GeoVec twoLineSec(T a1, T b1, T c1, T a2, T b2, T c2) {
+            // 小心除 0
+            return GeoVec((c1*a2-a1*c2) / (b1*a2-b2*a1),
+                          (c1*b2-c2*b1) / (a1*b2-b1*a1));
         }
 };
 // all public for convenient in contest
