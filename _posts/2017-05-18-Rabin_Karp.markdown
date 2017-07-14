@@ -37,16 +37,15 @@ UT gethash(char *S, int len) {
 
 {% highlight cpp linenos=table %}
 
-#pragma optimize ("O3")
-#pragma target ("avx")
+#include <functional>
 
 #define UT long long int
 #define PII std::pair< UT, UT >
 struct RollingHash {
-#define MAXN 100010
 #define PB push_back
 #define F first
 #define S second
+    enum { MAXN=100010 };
     static const PII p, q;
     PII h[MAXN], cache[MAXN];
 
@@ -85,7 +84,7 @@ struct RollingHash {
 
     // pw 代表 在 get_pow() 得到的 hash 值
     // 下面的函數用來取得 從原字串 i 位置開始長度 n 子字串的 hash 值
-    std::pair<UT,UT> partial_hash(int i, int n) { 
+    std::pair<UT,UT> partial_hash(int i, int n) {
         const PII &pw = cache[n];
         PII *h = this->h;
         ++h; //shift index
@@ -124,12 +123,12 @@ struct RollingHash {
 #undef PB
 #undef F
 #undef S
-#undef MAXN
 };
 const std::pair<UT,UT> RollingHash::p(311, 337);
 const std::pair<UT,UT> RollingHash::q(10000103, 10000121); // 一些常數
 #undef UT
 #undef PII
+
 
 {% endhighlight %}
 
