@@ -37,6 +37,7 @@ UT gethash(char *S, int len) {
 
 {% highlight cpp linenos=table %}
 
+#include <string>
 #include <functional>
 
 #define UT long long int
