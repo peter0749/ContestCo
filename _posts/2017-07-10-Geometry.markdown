@@ -39,8 +39,29 @@ class GeoVec {
             using std::sin;
             return GeoVec(cos(rad)*x-sin(rad)*y, sin(rad)*x+cos(rad)*y);
         }
-        const GeoVec unitVec(void) const { return (*this/(GeoVec<T>::L1(*this))); }
+        const GeoVec unitVec(void) const { return (*this/(L1(*this))); }
         const GeoVec tVec(void) const { return GeoVec(-y, x); }
+        const T cross(const GeoVec &v) {
+            return (this->x*v.y - this->y*v.x);
+        }
+        // 點向式
+        // 從 Line: sx,sy 射出的向量 v , dot: x, y
+        double dot2Line(T x, T y, T sx, T sy, const GeoVec &v) {
+            GeoVec u(x-sx, y-sy);
+            // 向量 sx, sy 射出的向量到 x, y
+            T cross = v.cross(u);
+            // v x u 得到面積
+            if(cross<0) cross=-cross;
+            return cross/L1(v);
+            // 面積 / 底 = 高（點到直線距離）
+        }
+        // 求 a1xb1y+c1=0, a2xb2y+c2=0 交點
+        static pair<T,T> twoLineSec(T a1, T b1, T c1, T a2, T b2, T c2) {
+            // 小心除 0 
+            pair<T,T> res;
+            res.second = (c1*a2-a1*c2) / (b1*a2-b2*a1);
+            res.first  = (c1*b2-c2*b1) / (a1*b2-b1*a1);
+        }
 };
 // all public for convenient in contest
 // following are operator overloading for class template GeoVec
@@ -63,10 +84,8 @@ const T operator*(const GeoVec<T> &first, const GeoVec<T> &second) {
 template<class T>
 const T operator%(const GeoVec<T> &first, const GeoVec<T> &second) {
     // cross product
-    return (first.x*second.y - first.y*second.x);
+    return first.cross(second);
 }
-
-
 
 {% endhighlight %}
 
