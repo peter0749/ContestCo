@@ -29,7 +29,7 @@ Rolling Hash (Rabin-Karp)
 
 假設原字串 Hash 為 $$A$$ ，字串長為 $$n$$ ，那麼
 
-$$ A^{2} = \left( A + 1 \right) \times base^{n} \big( mod P \big) $$
+$$ A^{2} = \left( base^{n} + 1 \right) \times A \big( mod  P \big) $$
 
 其中，$$base$$ 為 hash 使用的基底，$$P$$ 為 hash 使用的模數 $$A^{2}$$ 為字串 A 重複 2 遍的 hash 結果。
 
