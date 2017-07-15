@@ -97,7 +97,7 @@ struct RollingHash {
 
     std::pair<UT,UT> double_self(int n, std::pair<UT,UT> target) { // 字串 A -> AA (double) 的函式, O(1)
         // string: *A -> *2A
-        // hash  : (hA+1)*p^n, where n is length of A
+        // hash  : (p^n+1)*A, where n is length of A
         //std::pair<UT,UT> target = this->partial_hash(i, n);
         target.F = (target.F + this->mulmod(target.F,this->cache[n].F,q.F))%q.F;
         target.S = (target.S + this->mulmod(target.S,this->cache[n].S,q.S))%q.S;
