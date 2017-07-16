@@ -11,6 +11,8 @@ tags: segment_tree, persistent, rmq
 
 參考 Morris 大神的文章，所以 code 可能有 87% 像 :P
 
+（感謝 Morris 大神寫了很好的文章，他的 code 排版清楚，命名也好理解 XD）
+
 每次操作都是建立一個新節點，因此可以回溯。
 
 詢問時參考新舊節點的值，修改時也會參考舊節點產生新節點。
