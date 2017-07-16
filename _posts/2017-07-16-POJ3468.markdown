@@ -26,8 +26,8 @@ A simple problem? 當真?
 請配合
 
 ```
-ios::sync_with_stdio(false);
-cin.tie(0);
+    ios::sync_with_stdio(false);
+    cin.tie(0);
 ```
 
 使用，以免 `TLE`
