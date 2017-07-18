@@ -136,7 +136,7 @@ int main(void) {
 ## 同場加映，用 C 寫
 
 {% highlight cpp linenos=table %}
-
+// GCC: ANSI C
 #pragma GCC target ("avx")
 #pragma GCC optimize ("Os")
 #define max(a,b) ((a)>(b)?(a):(b))
