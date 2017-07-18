@@ -27,7 +27,9 @@ tags: segment_tree, persistent, rmq
 ## 程式碼
 
 {% highlight cpp linenos=table %}
-
+// verdict: AC
+// time:    0.3s
+// memory:  1.5MB
 #pragma GCC target ("avx")
 #pragma GCC optimize ("Os")
 #include <bits/stdc++.h>
