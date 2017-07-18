@@ -234,7 +234,7 @@ int main(void) {
             scanf("%lf %lf", &x, &y);
             cord.push_back(GeoVec<double>(x, y));
         }
-        random_shuffle(cord.begin(), cord.end());
+        //random_shuffle(cord.begin(), cord.end());
         O = cord[0]; r=0.0;
         for (int i=1; i<cord.size(); ++i) {
             if (GeoVec<double>::L2(cord[i]-O) > r*r + 1e-7) {
