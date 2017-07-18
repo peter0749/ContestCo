@@ -42,7 +42,7 @@ $$ A^{2} = \left( base^{n} + 1 \right) \times A \big( mod  P \big) $$
 
 ## 傳送門
 
-[CF182D](http://codeforces.com/contest/182/submission/28497065)
+[CF182D](http://codeforces.com/contest/182/problem/D)
 
 
 {% highlight cpp linenos=table %}
