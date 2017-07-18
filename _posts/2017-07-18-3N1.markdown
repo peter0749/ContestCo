@@ -20,6 +20,9 @@ Uva 的第一題，用線段樹殺根本就是大才小用。
 
 {% highlight cpp linenos=table %}
 
+// 在 ZeroJudge 底下測試的結果
+// AC, 96ms, 3.6MB
+
 #include <cstring>
 #define __MAX(a,b) ((a)>(b)?(a):(b))
 
