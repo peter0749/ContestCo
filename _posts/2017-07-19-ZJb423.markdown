@@ -15,6 +15,36 @@ ZeroJudge 上的簡單影像處理練習題，
 
 需要注意，DIFF 有可能為負數，要先判掉。
 
+code 會寫得那麼長，是為了能真的拿一張圖片來測試結果。
+
+## 結果
+
+Before: 
+
+![img1](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb423_Smart_Eraser/lenna.png)
+
+After:
+
+![img2](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb423_Smart_Eraser/lenna_to.png)
+
+Before:
+
+![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb423_Smart_Eraser/miku.png)
+
+After1:
+
+![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb423_Smart_Eraser/miku_to.png)
+
+AfterInf:
+
+![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb423_Smart_Eraser/miku_to2.png)
+
+我很喜歡初音的，會拿她的圖來當範例並沒有任何特別用意。
+
+（本來只想找幾張有 Alpha 通道的圖，就順便找初音的圖片了~ yeah! ）
+
+詳細可以到我的 [GitHub](https://github.com/peter0749/Image_processing_practice/tree/master/ZJb423_Smart_Eraser) 上面查看原始碼，使用 [lodepng](https://github.com/lvandeve/lodepng) 開檔存檔。
+
 ## 傳送門
 
 [ZJ_b423](https://zerojudge.tw/ShowProblem?problemid=b423) 
