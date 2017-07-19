@@ -326,7 +326,7 @@ struct Image {
 /*
  * Input:     pointer of Image object, operation mode, selected X, selected Y, pixel distance
  * Output:    A processed image
- * Mode:      0: process all data, 1: process adjacenting data
+ * Mode:      0: process all pixels, 1: process adjacenting pixels
  * Exception: selected coordinate out of range, mode is not 0/1, image pointer is a NULL pointer
  */
 class Eraser {
