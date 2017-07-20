@@ -19,6 +19,22 @@ Bilinear Interpolation (雙線性內插)
 
 Nearest Neighbor Interpolation (最近鄰居內插)
 
+## Bilinear Interpolation
+
+Bilinear Interpolation 的方法：
+
+找到影像縮放後，新像素點在原始影像對應的位置，並根據這個位置它左上、左下、右上、右下的臨近四個像素做兩次線性內插。
+
+第一次內插是利用左上、右上；左下、右下分別做一次內插，這次內插會得到兩個點，一上一下。
+
+再根據這兩個點，做一次內插，會得到新像素在新位置的 R,B,G,A 值。
+
+## Nearest Neighbor Interpolation
+
+Nearest Neighbor Interpolation 的方法：
+
+找到影像縮放後，新像素點在原始影像對應的位置，在該位置左上、左下、右上、右下的臨近四個點中，找到距離新像素點最近的的點，並設定新像素點的值為該點的值。
+
 ## 結果
 
 Before: 
