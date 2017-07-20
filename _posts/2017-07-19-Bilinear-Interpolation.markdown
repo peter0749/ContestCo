@@ -1,15 +1,23 @@
 ---
 layout: post
-title: 圖像縮放 -- Bilinear Interpolation, Nearest Neighbor
+title: 圖像縮放 -- Bilinear Interpolation, Nearest Neighbor Interpolation
 date: 2017-07-20 23:00
 comments: true
 external-url:
 tags: image_processing
 ---
 
+難得這次暑假很長，
+
 再來練習個簡單的圖像縮放，
 
-使用的方法有 Bilinear Interpolation 和 Nearest Neighbor
+使用的方法有 
+
+Bilinear Interpolation (雙線性內插)
+
+和 
+
+Nearest Neighbor Interpolation (最近鄰居內插)
 
 ## 結果
 
@@ -32,7 +40,7 @@ After:
 不照比例縮放
 
 上面的例子都是使用 Bilinear Interpolation 做成的，
-Nearest Neighbor 方法跑出來的結果就不放上來了。
+Nearest Neighbor Interpolation 方法跑出來的結果就不放上來了。
 
 ## 主要程式碼
 
