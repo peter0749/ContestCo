@@ -26,25 +26,21 @@ tags: image_processing
 X 向 Sobel operator:
 
 $$
-\[ 
 \begin{bmatrix}
     -1 & 0 & +1 \\
     -2 & 0 & +2 \\
     -1 & 0 & +1
 \end{bmatrix}
-\]
 $$
 
 Y 向 Sobel operator:
 
 $$
-\[
 \begin{bmatrix}
     -1 & -2 & -1 \\
      0 &  0 &  0 \\
     +1 & +2 & +1
 \end{bmatrix}
-\]
 $$
 
 X 方向卷積最多使像素值為 255 的 4 倍，
