@@ -145,8 +145,8 @@ namespace ImageProcess
                 sy = sy + (t*yMask[i][j]);
             }
         }
-        sx = sx - O;
-        sy = sy - O;
+        sx = sx - O; // 取絕對值，這裡 sx - O 代表 abs(sx - O)
+        sy = sy - O; // 取絕對值，這裏 sy - O 代表 abs(sy - O)
         Pix res((sx+sy)/8.0, 24);
         res.alpha = simg.getPixel(x,y).alpha;
         return res;
