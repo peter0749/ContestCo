@@ -43,6 +43,14 @@ After:
 
 （鬥雞眼！？）
 
+Before:
+
+![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb438_SeamCarving/miku.png)
+
+After:
+
+![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb438_SeamCarving/miku_to.png)
+
 ## 主要程式碼
 
 `EnergyMap.h` :
