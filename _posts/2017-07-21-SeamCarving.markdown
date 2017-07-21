@@ -21,6 +21,8 @@ Seam Carving 簡單來說，就是在影像中，由上到下（或左到右）�
 
 只好採用一點 greedy 的策略，每次只刪去目前能量最小的 1 個路徑，做 n 回合，來達成圖片縮放的功能。
 
+要算出一條能量總和最小的路徑，可以使用 DP 解。
+
 ## ZJ 題目傳送門
 
 [寫這題需要知道的梯度算法](https://zerojudge.tw/ShowProblem?problemid=b436)
