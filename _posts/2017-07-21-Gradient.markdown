@@ -188,3 +188,5 @@ namespace ImageProcess
 {% endhighlight %}
 
 完整程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/tree/master/ZJb436_gradient2)
+
+ZJ 上 AC 程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/blob/master/ZJb436_gradient2/zjb434.cpp)
