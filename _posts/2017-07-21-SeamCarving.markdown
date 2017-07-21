@@ -27,6 +27,8 @@ Seam Carving 簡單來說，就是在影像中，由上到下（或左到右）�
 
 [Seam Carving](https://zerojudge.tw/ShowProblem?problemid=b438)
 
+> 關於梯度可以戳[這裡](https://peter0749.github.io/ContestCo/Gradient.html)了解更多
+
 ## 結果
 
 實際使用的 code 與 ZJ 上的 code 有點差異。
