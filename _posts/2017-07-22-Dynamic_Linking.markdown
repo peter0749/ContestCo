@@ -32,10 +32,12 @@ g++ -c -fPIC alice.cpp bob.cpp
 接下來，產生一個 Shared library:
 
 ```
-g++ -shared -Wl,-soname,libXXX.so.1 -o libXXX.so.1.0.0 alice.o bob.o
+g++ -shared -Wl,-soname,libXXX.so.A -o libXXX.so.A.B.C alice.o bob.o
 ```
 
-`XXX`: 代表版本，第一個號碼不同時，通常表示兩個版號不相容。
+`XXX`: 代表這個 library 的名字。
+
+`A.B.C`: 代表版本。當新版發佈，第一個號碼 (A) 改變時，通常代表與舊版本不相容。
 
 `-Wl`: 代表告訴 linker 後面有參數。
 
