@@ -9,7 +9,7 @@ tags: gcc, g++
 
 Shared library 是很方便的東西，
 
-除了 Library 本身可重複利用，
+除了 Library 本身可重複利用外，
 
 因為主程式是在執行時，才將 Library link 進來，
 
