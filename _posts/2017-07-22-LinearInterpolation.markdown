@@ -11,17 +11,29 @@ tags: image_processing
 
 ## 結果
 
+平行：
+
+![img1](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/linear.png)
+
+放射狀：
+
+![img2](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/radial.png)
+
 Before:
+
+![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/miku.png)
 
 After:
 
-Before:
-
-After:
+![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/miku_to.png)
 
 Before:
 
+![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/Lenna.png)
+
 After:
+
+![img6](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/Lenna_to.png)
 
 ## ZJ 題目傳送門
 
