@@ -274,7 +274,7 @@ namespace ImageProcess
 
 不過我的實作方式跟 ZJ 上的也不一樣就是了。
 
-順便附上一張使用這個效果處理過的 Lenna 全身圖 [(!)](http://imgur.com/a/Ba4po)
+順便附上一張使用這個效果處理過的 Lenna 全身圖 [(!)](http://imgur.com/a/b7vs5)
 
 放心，應該沒有 ~~R18~~ ，應該沒有...
 
