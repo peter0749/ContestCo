@@ -57,6 +57,8 @@ $$ \left( R + G + B \right) / 3.0 $$
 
 如此一來，一個方塊就拼好了。之後，由上而下、由左而右把整張圖片拼完。
 
+> 關於路徑，可以戳[這裡](https://zerojudge.tw/ShowProblem?problemid=b438)了解，有練習題。
+
 ## 主要程式碼
 
 寫得落落長 ~.~
