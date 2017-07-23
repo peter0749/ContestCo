@@ -7,8 +7,13 @@ external-url:
 tags: image_processing
 ---
 
+簡單來說，就是一種將材質（紋理）轉換到目標圖片上的效果。
 
 ## 結果
+
+原始材質：
+
+![tex](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/tex.png)
 
 放上方表原圖，放下方代表結果。
 
