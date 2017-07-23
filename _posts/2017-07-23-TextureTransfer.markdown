@@ -277,3 +277,5 @@ namespace ImageProcess
 順便附上一張使用這個效果處理過的 Lenna 全身圖 [(!)](http://imgur.com/a/Ba4po)
 
 放心，應該沒有 ~~R18~~ ，應該沒有...
+
+~~ 是好孩子就不要好奇點進去看 ~~
