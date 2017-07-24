@@ -9,17 +9,17 @@ tags: gcc, g++
 
 Shared library 是很方便的東西，
 
-除了 Library 本身可重複利用外，
+除了 library 本身可重複利用外，
 
-因為主程式是在執行時，才將 Library link 進來，
+因為主程式是在執行時，才將 library link 進來，
 
 也可以減少主程式佔的硬碟空間。
 
-另外一個好處，如果主程式需要修改，但 Shared library 不用，
+另外一個好處，如果主程式需要修改，但 shared library 不用，
 
 那麼只需要重新編譯主程式就好了，省去重新編譯 library 的時間。
 
-## 建造一個 Shared library 
+## 建造一個 shared library 
 
 首先，先編譯好我們需要的物件檔 (object file)：
 
@@ -27,9 +27,11 @@ Shared library 是很方便的東西，
 g++ -c -fPIC alice.cpp bob.cpp
 ```
 
+`-fPIC`: 告訴編譯器產生無關位置程式碼 (Position-Independent Code) ，這樣在 shared library 被載入時，程式碼在記憶體中的位置是不固定的。
+
 在當前目錄下，應該會有 `alice.o`, `bob.o` 兩個物件檔
 
-接下來，產生一個 Shared library:
+接下來，產生一個 shared library:
 
 ```
 g++ -shared -Wl,-soname,libXXX.so.A -o libXXX.so.A.B.C alice.o bob.o
@@ -57,7 +59,7 @@ ln -s libfoo.so.1 libfoo.so
 
 有些編譯器可以接受，但不一定能解決問題。
 
-## 使用編譯好的 Shared library
+## 使用編譯好的 shared library
 
 記得還是要準備好 library 的 header ，
 
