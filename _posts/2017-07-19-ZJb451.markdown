@@ -19,7 +19,7 @@ $$ diff(A,B) = \sum_{a \in A對B對應的像素點, b \in B的像素點}{(a-b)^{
 
 $$\sum{a^{2}}$$ 可以用二維 prefix sum 求到，
 
-$$\sum{aAB}$$ 需要利用 FFT + 卷積。
+$$\sum{ab}$$ 需要利用 FFT + 卷積。
 
 並求出最小的 diff
 
