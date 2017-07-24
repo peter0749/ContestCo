@@ -13,7 +13,7 @@ tags: image_processing
 
 根據題目敘述，可以知道
 
-$$ arg \min_{i,j \include B左上角對齊A的位置} diff(A,B) = arg \min_{i,j} \sum_{A \include A對B對應的像素點, B \include B的像素點}{(A-B)^2}} = arg \min_{i,j} \sum{A^{2}} + \sum{B^{2}} - \sum{2AB} = arg \min_{i,j} \sum{A^{2}} - \sum{2AB} $$
+$$ diff(A,B) = \sum_{A \include A對B對應的像素點, B \include B的像素點}{(A-B)^{2}} = \sum{A^{2}} + \sum{B^{2}} - \sum{2AB}$$
 
 因為 $$\sum{B^{2}}$$ 在哪裡都一樣，只要算 $$\sum{A^{2}}$$ 和 $$\sum{2AB}$$ 的部分就可以了。
 
