@@ -13,27 +13,27 @@ tags: image_processing
 
 平行：
 
-![img1](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/linear.png)
+![img1](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427_ColorGradient/linear.png)
 
 放射狀：
 
-![img2](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/radial.png)
+![img2](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427_ColorGradient/radial.png)
 
 Before:
 
-![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/miku.png)
+![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427_ColorGradient/miku.png)
 
 After:
 
-![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/miku_to.png)
+![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427_ColorGradient/miku_to.png)
 
 Before:
 
-![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/Lenna.png)
+![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427_ColorGradient/Lenna.png)
 
 After:
 
-![img6](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427/Lenna_to.png)
+![img6](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb427_ColorGradient/Lenna_to.png)
 
 ## ZJ 題目傳送門
 
@@ -126,7 +126,7 @@ namespace ImageProcess
 
 {% endhighlight %}
 
-完整程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/tree/master/ZJb427)
+完整程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/tree/master/ZJb427_ColorGradient)
 
-ZJ 上 AC 程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/blob/master/ZJb427/zjb427.cpp)
+ZJ 上 AC 程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/blob/master/ZJb427_ColorGradient/zjb427.cpp)
 

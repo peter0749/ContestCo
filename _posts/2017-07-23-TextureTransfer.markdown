@@ -13,23 +13,23 @@ tags: image_processing
 
 原始材質：
 
-![tex](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/tex.png)
+![tex](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445_TextureTrnasfer/tex.png)
 
 放上方表原圖，放下方代表結果。
 
 Lenna 圖：
 
-![img1](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/Lenna.png)
+![img1](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445_TextureTrnasfer/Lenna.png)
 
-![img2](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/lenna_to.png)
+![img2](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445_TextureTrnasfer/lenna_to.png)
 
 Miku:
 
-![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/miku.png)
+![img3](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445_TextureTrnasfer/miku.png)
 
-![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/miku_to.png)
+![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445_TextureTrnasfer/miku_to.png)
 
-![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445/miku_to_big.png)
+![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb445_TextureTrnasfer/miku_to_big.png)
 
 （慢慢強化效果）
 
@@ -270,7 +270,7 @@ namespace ImageProcess
 
 {% endhighlight %}
 
-完整程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/tree/master/ZJb445)
+完整程式碼：[GitHub](https://github.com/peter0749/Image_processing_practice/tree/master/ZJb445_TextureTrnasfer)
 
 很可惜， ZJ 上的那題一直沒法 AC ，
 
