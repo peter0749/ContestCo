@@ -13,13 +13,15 @@ tags: image_processing
 
 根據題目敘述，可以知道
 
-$$ diff(A,B) = \sum_{A \in A對B對應的像素點, B \in B的像素點}{(A-B)^{2}} = \sum{A^{2}} + \sum{B^{2}} - \sum{2AB}$$
+$$ diff(A,B) = \sum_{a \in A對B對應的像素點, b \in B的像素點}{(a-b)^{2}} = \sum{a^{2}} + \sum{b^{2}} - \sum{2ab}$$
 
-因為 $$\sum{B^{2}}$$ 在哪裡都一樣，只要算 $$\sum{A^{2}}$$ 和 $$\sum{2AB}$$ 的部分就可以了。
+因為 $$\sum{b^{2}}$$ 在哪裡都一樣，只要算 $$\sum{a^{2}}$$ 和 $$\sum{2ab}$$ 的部分就可以了。
 
-$$\sum{A^{2}}$$ 可以用二維 prefix sum 求到，
+$$\sum{a^{2}}$$ 可以用二維 prefix sum 求到，
 
-$$\sum{2AB}$$ 需要利用 FFT + 卷積。
+$$\sum{aAB}$$ 需要利用 FFT + 卷積。
+
+並求出最小的 diff
 
 ## 傳送門
 
