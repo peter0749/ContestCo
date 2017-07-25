@@ -22,7 +22,7 @@ X, Y 各用兩組 base ，共用一組 Mod 就可以避免碰撞。
 ## 程式碼
 
 {% highlight cpp linenos=table %}
-
+// AC, 1.6s
 #pragma GCC optimize ("O3")
 #include <cstring>
 #include <functional>
