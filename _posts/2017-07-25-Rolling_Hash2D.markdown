@@ -77,7 +77,11 @@ $$P_{x}^{M}$$ 和 $$P_{y}^{N}$$ 可以預建表，因此查詢時間就可以是
 
 ## 範例程式碼
 
+驗證程式正確性 [Uva11019 -- Matrix Matcher](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1960)
+
 {% highlight cpp linenos=table %}
+// AC, C++11, 0.220s
+#pragma GCC optimize ("O3")
 #include <cstring>
 #include <functional>
 
@@ -86,7 +90,7 @@ struct RollingHash2D {
 #define PB push_back
 #define F first
 #define S second
-    enum { MAXN=101, MAXM=101 };
+    enum { MAXN=1002, MAXM=1002 };
     static const UT px, py, q; // X向 hash 的 base, Y向 hash 的 base, mod Prime
     UT h[MAXN][MAXM];
     UT cacheX[MAXM], cacheY[MAXN];
@@ -141,65 +145,48 @@ struct RollingHash2D {
 #undef F
 #undef S
 };
-//const UT RollingHash2D::px(311);
-const UT RollingHash2D::px(31);
-//const UT RollingHash2D::py(337);
+const UT RollingHash2D::px(311);
 const UT RollingHash2D::py(337);
 const UT RollingHash2D::q(10000121); // 一些常數
 #undef UT
 
-int string2D[7][7] = {
-    0, 0, 1, 1, 2, 3, 5,
-    3, 1, 0, 9, 11, 13, 15,
-    2, 3, 0, 8, 13, 0, 1,
-    0, 0, 1, 1, 2, 3, 4,
-    0, 7, 1, 5, 1, 0, 0, // (4, 4)
-    3, 1, 0, 0, 3, 0, 7, //
-    1, 4, 0, 0, 1, 3, 2
-                ////
-};
-
-int patt[2][2] = {
-    1, 0,
-    3, 0
-    //5, 7,
-    //3, 5
-};
 RollingHash2D stringH2D;
 RollingHash2D pattH2D;
 #include <iostream>
 #include <iomanip>
+
+int str[1000001];
+int pat[10001];
+
 int main(void) {
     using namespace std;
-    cout << "2D string to match:" << endl;
-    for (int i=0; i<7; ++i) {
-        for (int j=0; j<7; ++j)
-            cout << setw(3) << string2D[i][j];
-        if (i==4||i==1) cout << "  <----- here";
-        cout << endl;
-    }
-    cout << "pattern (this should be located at string2D[1][1] and string2D[4][4]): " << endl;
-    for (int i=0; i<2; ++i) {
-        for (int j=0; j<2; ++j) {
-            cout << setw(3) << patt[i][j];
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    stringH2D.get_pow(1001,1001);
+    pattH2D.get_pow(101,101);
+    int T; cin >> T;
+    while(T--) {
+        int sh,sw,th,tw;
+        cin >> sh >> sw;
+        for (int i=0, k=0; i<sh; ++i) for (int j=0; j<sw; ++j) {
+            char c; cin >> c;
+            str[k++] = (int)c;
         }
-        cout << endl;
-    }
-    stringH2D.get_pow(7,7);
-    pattH2D.get_pow(2,2);
-    stringH2D.get_hash(&string2D[0][0], 7, 7);
-    pattH2D.get_hash(&patt[0][0], 2, 2);
-    long int pattH = pattH2D.partial_hash(0,0,2,2);
-    cout << "pattH: " << pattH << endl;
-    for (int i=0; i+2<=7; ++i) {
-        for (int j=0; j+2<=7; ++j) {
-            long int stringH = stringH2D.partial_hash(i,j,2,2);
-            if (stringH==pattH) cout << "Found! (" << i << ',' << j << ") : " << stringH << endl;
+        cin >> th >> tw;
+        for (int i=0, k=0; i<th; ++i) for (int j=0; j<tw; ++j) {
+            char c; cin >> c;
+            pat[k++] = (int)c;
         }
+        stringH2D.get_hash(str, sh, sw);
+        pattH2D.get_hash(pat, th, tw);
+        int cnt=0;
+        int patV = pattH2D.partial_hash(0,0,th,tw);
+        for (int i=0; i+th<=sh; ++i) for (int j=0; j+tw<=sw; ++j)
+            if (stringH2D.partial_hash(i,j,th,tw)==patV) ++cnt;
+        cout << cnt << endl;
     }
     return 0;
 }
-
 {% endhighlight %}
 
 附上一張推導時畫的東西：
