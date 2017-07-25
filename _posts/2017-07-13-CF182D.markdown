@@ -9,7 +9,7 @@ tags: string, hash
 
 ## 解法
 
-Rolling Hash (Rabin-Karp)
+Rolling Hash
 
 給 A, B 兩字串，
 

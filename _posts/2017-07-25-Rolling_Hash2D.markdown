@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Template -- 2D Rolling Hash (Rabin-Karp)
+title: Template -- 2D Rolling Hash
 date: 2017-07-25 7:30
 comments: true
 external-url:
 tags: hash string
 ---
 
-2D Rolling Hash (Rabin-Karp) 模板
+2D Rolling Hash 模板
 
 ## 實作方式
 
@@ -19,7 +19,7 @@ tags: hash string
 
 在產生 hash 時，X 和 Y 方向的 Mod 數必須一致，才可以得到正確結果。
 
-產生 2D Rabin-Karp 的方法與 "子矩陣求和" 用的方法類似，
+產生 2D 的方法與 "子矩陣求和" 用的方法類似，
 
 ### 以子矩陣求和為出發點
 
@@ -43,7 +43,7 @@ S 就是 A 的 2D prefix sum ，要求得的結果就是，
 
 至於為什麼是這樣，可以到 [這裏](https://leetcode.com/problems/range-sum-query-2d-immutable/#/description) 寫個題目，感受一下。
 
-### 從子矩陣求和到 2D Rabin-Karp
+### 從子矩陣求和到 2D Rolling Hash
 
 說明完了 2D prefix sum ，從這段開始進入正題，要如何在 $$O(1)$$ 的時間內，求出一個區域的 hash 值呢？
 
@@ -53,7 +53,7 @@ $$S[i][j] = S[i-1][j] \times P_{y} + RollingHashFromLeft \times P_{x} + A[i-1][j
 
 其中， $$P_{x}$$ 代表 X 方向的 base ， $$P_{y}$$ 代表 Y 方向的 base ，
 
-$$RollingHashFromLeft$$ 代表從 X 方向（左方）累計過來的 Rolling Hash (Rabin-Karp) 值。
+$$RollingHashFromLeft$$ 代表從 X 方向（左方）累計過來的 Rolling Hash 值。
 
 > 一些細節：要先將 $$S[0][...]$$ 和 $$S[...][0]$$ 初始化為 0 
 
@@ -73,7 +73,7 @@ $$ S[i+N][j+M] - S[i][j+M] \times P_{y}^{N} - S[i+N][j] \times P_{x}^M + S[i][j]
 
 $$P_{x}^{M}$$ 和 $$P_{y}^{N}$$ 可以預建表，因此查詢時間就可以是 $$O(1)$$
 
-以上就是 2D Rolling Hash (Rabin-Karp) 的建構、查詢方式，希望能幫到有需要的人！
+以上就是 2D Rolling Hash 的建構、查詢方式，希望能幫到有需要的人！
 
 ## 範例程式碼
 

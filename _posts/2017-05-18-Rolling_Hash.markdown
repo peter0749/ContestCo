@@ -7,7 +7,7 @@ external-url:
 tags: hash string
 ---
 
-Rolling Hash (Rabin-Karp) 模板
+Rolling Hash 模板
 
 想想我們是怎麼將字串轉成十進位數字，都是一樣的道理。
 

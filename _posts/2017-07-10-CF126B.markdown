@@ -7,7 +7,7 @@ external-url:
 tags: string
 ---
 
-Rolling Hash (Rabin-Karp) + 二分搜
+Rolling Hash + 二分搜
 
 題目要找到最長
 
