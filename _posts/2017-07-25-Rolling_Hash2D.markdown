@@ -189,6 +189,107 @@ int main(void) {
 }
 {% endhighlight %}
 
+## 範例二
+
+上面的只用一組 base ，有可能發生碰撞，這個時候可以考慮使用兩組 base。
+
+{% highlight cpp linenos=table %}
+#pragma GCC optimize ("O3")
+#include <cstring>
+#include <functional>
+#define UT long long int
+struct PI {
+    const static UT q;
+    UT x, y;
+    PI(UT x, UT y) : x(x), y(y) {}
+    PI(const PI &ref) : x(ref.x), y(ref.y) {}
+    PI() : x(0), y(0) {}
+};
+const UT PI::q(100001581); // 在 mod p 底下執行
+const PI operator+(const PI &l, const PI &r) {
+    PI res((l.x+r.x)%PI::q,(l.y+r.y)%PI::q);
+    return res;
+}
+const PI operator-(const PI &l, const PI &r) {
+    PI res((l.x+PI::q-r.x)%PI::q, (l.y+PI::q-r.y)%PI::q);
+    return res;
+}
+const PI operator*(const PI &l, const PI &r) {
+    PI res(l.x*r.x%PI::q, l.y*r.y%PI::q);
+    return res;
+}
+const bool operator==(const PI &l, const PI &r) { // for std::unordered_set, std::unordered_map
+    return l.x==r.x&&l.y==r.y;
+}
+const bool operator<(const PI &l, const PI &r) {  // for std::unordered_set, std::unordered_map
+    if (l.x!=r.x) return l.x<r.x;
+    return l.y<r.y;
+}
+namespace std { // this give your custom class hash value
+    template <>
+    struct hash<PI> {
+        // @overload
+        std::size_t operator()(const PI& p) const {
+            using std::hash;
+            using std::pair;
+            return hash<UT>()(p.x) ^ hash<UT>()(p.y);
+        }
+    };
+};
+struct RollingHash2D {
+#define PB push_back
+#define F first
+#define S second
+    enum { MAXN=600, MAXM=600 };
+    static const PI px, py; // X向 hash 的 base, Y向 hash 的 base, mod Prime
+    PI h[MAXN][MAXM];
+    PI cacheX[MAXM], cacheY[MAXN]; // power of base X, power of base Y
+
+    inline void get_pow(const int n, const int m) { // Hash basis 冪次
+        // n, 高 / m, 寬
+        cacheX[0].x=cacheX[0].y=1;
+        cacheY[0].x=cacheY[0].y=1;
+        for (int i=1; i<=n; ++i) {
+            cacheY[i] = cacheY[i-1] * py;
+        }
+        for (int i=1; i<=m; ++i) {
+            cacheX[i] = cacheX[i-1] * px;
+        }
+    }
+
+    inline void get_hash(int *s, int n, int m) { // 取得 hash 表
+        // n, 高 / m, 寬
+        // 下面要做的事和 2D prefix sum 類似
+        std::memset(h, 0x00, sizeof(PI)*MAXN*MAXM);
+        for (int i=1; i<=n; ++i) {
+            PI sum(0,0);
+            for (int j=1; j<=m; ++j) {
+                UT val = (UT)(s[(i-1)*m+j-1]+1);
+                PI S(val, val);
+                sum = sum * px + S; // X 向 hash
+                h[i][j] = h[i-1][j] * py + sum;     // Y 向 hash
+            }
+        }
+    }
+
+    PI partial_hash(int i, int j, int n, int m) {
+        // i: row; j: col; n: 高; m: 寬
+        // 從 s[i][j] 往下看 nxm 大小矩陣，所對應的 hash 值
+        const PI &pwX = cacheX[m]; // pX^m
+        const PI &pwY = cacheY[n]; // pY^n
+        PI result = h[i+n][j+m] - (h[i][j+m]*pwY + h[i+n][j]*pwX) + h[i][j]*pwX*pwY;
+        // 小心 overflow
+        return result;
+    }
+#undef PB
+#undef F
+#undef S
+};
+const PI RollingHash2D::px(41,233); // X, Y 個使用兩組 base, 就不怕碰撞了
+const PI RollingHash2D::py(47,337);
+
+{% endhighlight %}
+
 附上一張推導時畫的東西：
 
 ![img](http://i.imgur.com/GZWrPsH.jpg)
