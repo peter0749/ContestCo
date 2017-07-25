@@ -202,3 +202,8 @@ int main(void) {
 
 {% endhighlight %}
 
+附上一張推導時畫的東西：
+
+![img](../image/IMG_0355.JPG)
+
+
