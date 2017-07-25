@@ -205,7 +205,7 @@ struct PI {
     PI(const PI &ref) : x(ref.x), y(ref.y) {}
     PI() : x(0), y(0) {}
 };
-const UT PI::q(100001581); // 在 mod p 底下執行
+const UT PI::q(10000121); // 在 mod p 底下執行
 const PI operator+(const PI &l, const PI &r) {
     PI res((l.x+r.x)%PI::q,(l.y+r.y)%PI::q);
     return res;
@@ -221,7 +221,7 @@ const PI operator*(const PI &l, const PI &r) {
 const bool operator==(const PI &l, const PI &r) { // for std::unordered_set, std::unordered_map
     return l.x==r.x&&l.y==r.y;
 }
-const bool operator<(const PI &l, const PI &r) {  
+const bool operator<(const PI &l, const PI &r) {
     if (l.x!=r.x) return l.x<r.x;
     return l.y<r.y;
 }
@@ -240,7 +240,7 @@ struct RollingHash2D {
 #define PB push_back
 #define F first
 #define S second
-    enum { MAXN=600, MAXM=600 };
+    enum { MAXN=1111, MAXM=1111 };
     static const PI px, py; // X向 hash 的 base, Y向 hash 的 base, mod Prime
     PI h[MAXN][MAXM];
     PI cacheX[MAXM], cacheY[MAXN]; // power of base X, power of base Y
@@ -285,8 +285,46 @@ struct RollingHash2D {
 #undef F
 #undef S
 };
-const PI RollingHash2D::px(41,233); // X, Y 個使用兩組 base, 就不怕碰撞了
-const PI RollingHash2D::py(47,337);
+const PI RollingHash2D::px(47,331); // X, Y 個使用兩組 base, 就不怕碰撞了
+const PI RollingHash2D::py(337,37);
+
+RollingHash2D stringH2D;
+RollingHash2D pattH2D;
+#include <iostream>
+#include <iomanip>
+
+int str[1000001];
+int pat[10001];
+
+int main(void) {
+    using namespace std;
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    stringH2D.get_pow(1001,1001);
+    pattH2D.get_pow(101,101);
+    int T; cin >> T;
+    while(T--) {
+        int sh,sw,th,tw;
+        cin >> sh >> sw;
+        for (int i=0, k=0; i<sh; ++i) for (int j=0; j<sw; ++j) {
+            char c; cin >> c;
+            str[k++] = (int)c;
+        }
+        cin >> th >> tw;
+        for (int i=0, k=0; i<th; ++i) for (int j=0; j<tw; ++j) {
+            char c; cin >> c;
+            pat[k++] = (int)c;
+        }
+        stringH2D.get_hash(str, sh, sw);
+        pattH2D.get_hash(pat, th, tw);
+        int cnt=0;
+        PI patV = pattH2D.partial_hash(0,0,th,tw);
+        for (int i=0; i+th<=sh; ++i) for (int j=0; j+tw<=sw; ++j)
+            if (stringH2D.partial_hash(i,j,th,tw)==patV) ++cnt;
+        cout << cnt << endl;
+    }
+    return 0;
+}
 
 {% endhighlight %}
 
