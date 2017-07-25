@@ -170,7 +170,7 @@ int main(void) {
 
 {% endhighlight %}
 
-**那麼，使用 hash map 用來查找，是否會比較快呢？**
+**那麼，使用 hash map 來查找，是否會比較快呢？**
 
 {% highlight cpp linenos=table %}
 // AC, 0.998s
