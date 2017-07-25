@@ -204,6 +204,6 @@ int main(void) {
 
 附上一張推導時畫的東西：
 
-![img](../images/IMG_0355.JPG)
+![img](http://i.imgur.com/GZWrPsH.jpg)
 
 
