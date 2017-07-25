@@ -221,7 +221,7 @@ const PI operator*(const PI &l, const PI &r) {
 const bool operator==(const PI &l, const PI &r) { // for std::unordered_set, std::unordered_map
     return l.x==r.x&&l.y==r.y;
 }
-const bool operator<(const PI &l, const PI &r) {  // for std::unordered_set, std::unordered_map
+const bool operator<(const PI &l, const PI &r) {  
     if (l.x!=r.x) return l.x<r.x;
     return l.y<r.y;
 }
