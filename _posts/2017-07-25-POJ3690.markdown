@@ -13,9 +13,13 @@ tags: hash string
 
 [POJ 3690](http://poj.org/problem?id=3690)
 
-## 程式碼
+## 解法
 
-私認為沒什麼參考價值，因為只有 '*', '0' 兩種字元，就乾脆不 mod 了，
+私認為沒什麼參考價值，因為這個算法複雜度太高。
+
+改用其他字串演算法應該會快很多。
+
+因為只有 '*', '0' 兩種字元，就乾脆不 mod 了，
 
 可以搶一點速度。
 
@@ -29,6 +33,8 @@ map 的 Key 存 pattern 的 hash 值， value 用來數次數。
 ，如果有，累計次數、該 pattern 從 map 移除。
 
 最後輸出累計結果。
+
+## 程式碼
 
 {% highlight cpp linenos=table %}
 // AC, 壓底線？ 2829MS/3000MS, 12380K, G++
