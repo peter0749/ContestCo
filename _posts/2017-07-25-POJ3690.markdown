@@ -19,14 +19,14 @@ tags: hash string
 
 可以搶一點速度。
 
-總之，算法就是先把要搜尋的 NxM 矩陣做 Rolling Hash 起來，
+總之，算法就是先把要搜尋的 NxM 矩陣 Rolling Hash 起來，
 
 然後對每個輸入的 pattern 做 hash ，把它塞進一個 map ，
 
-map 用來數次數。
+map 的 Key 存 pattern 的 hash 值， value 用來數次數。
 
 輸入完後，利用 NxM 的矩陣得到的 hash 值，判斷在 map 內的 pattern 是否有出現
-，如果有，累計次數、從 map 移除。
+，如果有，累計次數、該 pattern 從 map 移除。
 
 最後輸出累計結果。
 
