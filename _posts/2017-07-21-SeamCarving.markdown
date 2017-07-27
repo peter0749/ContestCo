@@ -55,6 +55,14 @@ After:
 
 ![img4](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb438_SeamCarving/miku_to.png)
 
+Before:
+
+![img5](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb438_SeamCarving/Broadway_tower.png)
+
+After:
+
+![img6](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb438_SeamCarving/Broadway_tower_seam.png)
+
 ## 主要程式碼
 
 `EnergyMap.h` :
