@@ -77,7 +77,7 @@ namespace FFT  // WARNING!!! do not reveal this namespace
             double ndelta_angle = -(angle_numerator / BlockSize);
             double sin1 = sin(ndelta_angle);
             double cos1 = cos(ndelta_angle);
-            double sin2 = 2*sin1*cos1;
+            double sin2 = 2*sin1*cos1; // 注意：用合角公式計算有可能放大誤差，這是為了搶速度。
             double cos2 = 2*cos1*cos1-1.0;
             for (int i = 0; i < NumSamples; i += BlockSize) {
                 complex<double> a1(cos1, sin1), a2(cos2, sin2);
