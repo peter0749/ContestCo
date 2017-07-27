@@ -63,6 +63,10 @@ After:
 
 ![img6](https://github.com/peter0749/Image_processing_practice/raw/master/ZJb438_SeamCarving/Broadway_tower_seam.png)
 
+Process (fake):
+
+![img7](https://raw.githubusercontent.com/peter0749/Image_processing_practice/master/ZJb438_SeamCarving/red_plot.png)
+
 ## 主要程式碼
 
 `EnergyMap.h` :
