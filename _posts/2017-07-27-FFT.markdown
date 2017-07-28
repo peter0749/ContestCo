@@ -137,6 +137,31 @@ namespace FFT  // WARNING!!! do not reveal this namespace
                 ret[i] = s[i].real();
             }
         }
+    // 同上，如果編譯器不支援 fast-math 選項，記得註解掉下面兩行
+    template<class T>
+        void mul(const vector<T> &a, const vector<T> &b, vector<double> &ret) __attribute__((optimize("fast-math")));
+    // 下面的流程 A*B -> a=FFT(A); b=FFT(B) -> c = a dot b -> ANS = IFFT(c)
+    template<class T>
+        void mul(const vector<T> &a, const vector<T> &b, vector<double> &ret) {
+            int n = a.size();
+            vector<complex<double> > s(n), d1(n), d2(n), y(n);
+            for (int i = 0; i < n; ++i) {
+                s[i] = complex<double>(a[i], 0);
+            }
+            FFT(false, s, d1);
+            for (int i = 0; i < n; ++i) {
+                s[i] = complex<double>(b[i], 0);
+            }
+            FFT(false, s, d2);
+            for (int i = 0; i < n; ++i) {
+                y[i] = d1[i] * d2[i];
+            }
+            FFT(true, y, s);
+            ret.resize(n,0);
+            for (int i = 0; i < n; ++i) {
+                ret[i] = s[i].real();
+            }
+        }
 }; // namespace FFT
 
 double area[512][512];
