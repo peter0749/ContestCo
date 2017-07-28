@@ -1,7 +1,7 @@
 ---
 layout: post
 title: FFT 新模板測試 -- 大數乘法
-date: 2017-07-29 01:05
+date: 2017-07-29 00:01
 comments: true
 external-url:
 tags: bigint, fft
