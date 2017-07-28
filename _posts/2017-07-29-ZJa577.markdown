@@ -32,9 +32,9 @@ $$
 #pragma GCC optimize ("O3")
 #include <algorithm>
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
 using namespace std;
 
 namespace FFT_TOOL {
@@ -99,14 +99,14 @@ namespace FFT_TOOL {
                     y[i].r /= len;
         }
 
-}; // namespace FFT
+}; // namespace FFT_TOOL
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <vector>
 
-char sa[(1<<17)+100], sb[(1<<17)+100];
+char sa[(1<<17)+10], sb[(1<<17)+10];
 FFT_TOOL::Complex<double> a[1<<18], b[1<<18];
 std::vector<int> res;
 

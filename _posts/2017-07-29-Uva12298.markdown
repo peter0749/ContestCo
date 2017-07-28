@@ -32,9 +32,9 @@ FFT + 卷積*4 (?)
 #pragma GCC optimize ("O3")
 #include <algorithm>
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
 using namespace std;
 
 namespace FFT_TOOL {
