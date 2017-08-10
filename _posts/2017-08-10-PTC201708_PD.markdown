@@ -1,0 +1,140 @@
+---
+layout: post
+title: PTC 2017 08 -- Problem 4
+date: 2017-08-09 23:20
+comments: true
+external-url:
+tags: math
+---
+
+## 題目概述
+
+給定大小 $$N \times N $$ 的格子點，這些格子點中，
+四點決定一個正方形（注意：斜的也算）。
+
+現在，拿掉某一個點 (x,y) ，使得能構成正方形的格子點集合為：
+
+$$ S = \big\{ \left( p,q \right) : p,q \in \big\{1,...,N\big\} \wedge \left( p,q \right) \neq \left( x,y \right) \big\} $$
+
+問用這些格子點，能畫出多少種不同正方形（頂點不同即視為不同）。
+
+## 輸入
+
+第一行是測資數量 T ，
+
+後面有 T 行，
+
+每一行有 `N x y` ，
+
+代表 $$ N \times N $$ 的格子點，
+刪掉點 $$ \left( x,y \right) $$  。
+
+## 輸出
+
+對於每一筆測資，輸出對應的正方形數量。
+
+## 限制
+
+測資數量不大於 100 筆
+
+$$ 1 < N \leq 1000 $$
+
+答案可能爆 int
+
+## 範側
+
+Input: 
+
+```
+6
+3 1 1
+3 1 2
+3 2 2
+4 1 1
+4 1 2
+4 2 2
+```
+
+Output:
+
+```
+4
+3
+2
+17
+15
+13
+```
+
+## 解法
+
+想像一個由 $$ M \times M $$ 大小的框框，這個框框唯一決定了，
+在框框邊線上可以構成的所有正方形組合，再移動這個框框，窮舉在 $$ N \times N $$ 格子點中，不同的 $$ M \times M $$ 的擺放位置。再以此方式，枚舉每一種 $$M$$ 大小，就可以在不刪除某個點的情況下，$$ N \times N $$ 格子點可以畫出的不同正方形了。
+
+在不刪除點的條件下，格子點可以畫出的正方形數量：
+
+$$ \left( N-M+1 \right) ^{2} \times \left( M-1 \right) $$
+
+$$N$$ 代表題目格子點大小， $$M$$ 代表框框大小。
+掃過所有可能的 $$M$$ 即可。
+
+那麼，如何去掉以 $$ \left( x,y \right) $$ 為頂點的所有正方形呢？
+
+一樣用上面框框的概念，用一個大小 $$ M \times M $$ 的框框，讓框框的邊線貼著 $$ \left( x,y \right) $$ ，繞一圈、數數量，即可求出所有以 $$ \left( x,y \right) $$ 為頂點的所有正方形數量了。
+
+答案就是：
+
+不刪掉 $$ \left( x,y \right) $$ 情況的所有正方形數量 - 所有以 $$ \left( x,y \left) 為頂點的正方形數量
+
+這個做法複雜度是 $$ O \left( N^{2} \right) $$ 。
+
+求出不刪掉點的正方形數量要 $$ O(N) $$ ，
+
+求出以 $$ \left( x,y \right) $$ 為頂點的所有正方形數量要 $$ O( N^{2} ) $$ 。
+
+聽說還有更快的做法。
+
+## 程式碼
+
+{% highlight cpp linenos=table %}
+#include <bits/stdc++.h>
+using namespace std;
+
+long long T, n, x, y;
+
+int main(void) {
+    ios::sync_with_stdio(false);
+    cin >> T;
+    while(T--) {
+        cin >> n >> x >> y;
+        long long tot = 0;
+        for (int i=2; i<=n; ++i) {
+            tot += (long long)(n-i+1)*(n-i+1)*(i-1);
+        }
+        long long w=0, h=0;
+        w = max(x-1,n-x);
+        h = max(y-1,n-y);
+        long long s = max(w,h);
+#define IN() (tx>=1L&&ty>=1L&&tx+i<=n&&ty+i<=n)
+        for (int i=1; i<=s; ++i) {
+            int tx=x-i;
+            int ty=y-i;
+            if (IN()) --tot;
+            for (int j=0; j<i; j++) {
+                ++tx; if(IN()) --tot;
+            }
+            for (int j=0; j<i; ++j) {
+                ++ty; if(IN()) --tot;
+            }
+            for (int j=0; j<i; ++j) {
+                --tx; if(IN()) --tot;
+            }
+            for (int j=1; j<i; ++j) {
+                --ty; if(IN()) --tot;
+            }
+        }
+        cout << tot << '\n';
+    }
+    return 0;
+}
+{% endhighlight %}
