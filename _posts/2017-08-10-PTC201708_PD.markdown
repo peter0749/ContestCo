@@ -1,6 +1,6 @@
 ---
 layout: post
-title: PTC 2017 08 -- Problem 4
+title: PTC 2017/08 -- Problem 4
 date: 2017-08-09 23:20
 comments: true
 external-url:
