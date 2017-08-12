@@ -18,6 +18,10 @@ $$ S = \big\{ \left( p,q \right) : p,q \in \big\{1,...,N\big\} \wedge \left( p,q
 
 問用這些格子點，能畫出多少種不同正方形（頂點不同即視為不同）。
 
+## 題目傳送門
+
+[PTC 2017/08](http://e-tutor.itsa.org.tw/e-Tutor/mod/programming/view.php?id=37474)
+
 ## 輸入
 
 第一行是測資數量 T ，
