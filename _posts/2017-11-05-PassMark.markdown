@@ -38,6 +38,7 @@ tags: bash_script
 ## 賽場
 
 {% highlight bash linenos=table %}
+#!/bin/bash
 O1="$(mktemp)"
 O2="$(mktemp)"
 tee >("./$1" > "$O1")  >("./$2" > "$O2") > /dev/null
