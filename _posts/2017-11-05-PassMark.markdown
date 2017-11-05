@@ -1,0 +1,33 @@
+---
+layout: post
+title: 對拍程式
+date: 2017-11-05 15:00
+comments: true
+external-url:
+tags: bash_script
+---
+
+## 對拍程式
+
+{% highlight bash linenos=table %}
+
+#!/bin/bash
+if [[ $# -ge 2 ]]; then
+    program1="$1"
+    program2="$2"
+else
+    >&2 echo "Usage: $0 program1 program2"
+    exit 1
+fi
+OUTPUT1="$(mktemp -u -t oj-test-input-1-XXXXXX)"
+OUTPUT2="$(mktemp -u -t oj-test-input-2-XXXXXX)"
+tee >("./$program1" > "$OUTPUT1")  >("./$program2" > "$OUTPUT2") > /dev/null
+if sync && diff -w -q "$OUTPUT1" "$OUTPUT2" &> /dev/null; then
+    echo "AC"
+else
+    echo "WA"
+fi
+rm "$OUTPUT1"
+rm "$OUTPUT2"
+
+{% endhighlight %}
