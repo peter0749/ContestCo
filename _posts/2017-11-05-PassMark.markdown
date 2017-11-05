@@ -31,6 +31,12 @@ tags: bash_script
 
 讀取測資檔。
 
+或者
+
+```
+./generator | ./對拍 pa pb 
+```
+
 如果`pa`, `pb` 輸出相同，對拍程式輸出 `AC`；
 
 否則輸出 `WA`，並印出 `diff` 結果。
