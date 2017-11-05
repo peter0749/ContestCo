@@ -7,6 +7,22 @@ external-url:
 tags: bash_script
 ---
 
+## 賽場
+
+{% highlight bash linenos=table %}
+#!/bin/bash
+O1="$(mktemp)"
+O2="$(mktemp)"
+tee >("./$1" > "$O1")  >("./$2" > "$O2") > /dev/null
+if sync && diff -w -q "$O1" "$O2" &> /dev/null; then
+    echo "AC"
+else
+    echo "WA"
+fi
+{% endhighlight %}
+
+## 本機
+
 {% highlight bash linenos=table %}
 #!/bin/bash
 if [[ $# -ge 2 ]]; then
