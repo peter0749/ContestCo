@@ -7,8 +7,6 @@ external-url:
 tags: bash_script
 ---
 
-## 對拍程式
-
 {% highlight bash linenos=table %}
 
 #!/bin/bash
