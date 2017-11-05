@@ -7,6 +7,30 @@ external-url:
 tags: bash_script
 ---
 
+## 使用方法
+
+傳入兩個執行檔名稱。
+
+例如：
+
+```
+./對拍 pa pb
+```
+
+`pa`, `pb` 是你要對拍的兩隻程式。
+
+程式會從 `stdin` 讀入輸入，然後重導給 `pa`, `pb`，
+
+照正常的方式輸入測資即可。
+
+當然也可以
+
+```
+./對拍 pa pb < in
+```
+
+讀取測資檔。
+
 ## 賽場
 
 {% highlight bash linenos=table %}
